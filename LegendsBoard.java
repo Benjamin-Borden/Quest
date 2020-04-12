@@ -3,6 +3,7 @@ import java.util.Random;
 public class LegendsBoard extends Board{
 
     private final int NUM_LANES = 3;
+    private final int LANE_WIDTH = 2;
 
     public LegendsBoard(Game g) {
         boardState = new Tile[8][8];
@@ -24,7 +25,7 @@ public class LegendsBoard extends Board{
         // moves hero back to the nexus
         // randomizes which nexus spot it is
         Random random = new Random();
-        int randomCell = random.nextInt(2);
+        int randomCell = random.nextInt(LANE_WIDTH);
         int position = playerLocs[heroID];
         int nexusCell = ((getLane(position[1])-1)*NUM_LANES) + randomCell;
         moveTo(boardHeight-1, nexusCell, heroID);
@@ -44,13 +45,28 @@ public class LegendsBoard extends Board{
     }
 
     public boolean validMove(int row, int col) {
-        // not inaccessible space
-        // not past monster in that lane
-        // todo complete
+        boolean ret = true;
+        Tile moveToTile = boardState[row][col];
+        if (!moveToTile.passable()) {ret = false;}
+        // can't go past monster in lane
+        else if (row<monsterLoc(getLane(col))) {ret = false;}
+        return ret;
     }
 
     public int getLane(int col) {
         int ret = (col / 3) + 1; // integer division
+        return ret;
+    }
+
+    public int monsterLoc(int lane) {
+        // given lane, returns row of last monster (closest to hero nexus)
+        // if no monsters in lane, returns -1
+        int ret = -1
+        for (int i=0; i<boardHeight; i++) {
+            for (int j=0; j<LANE_WIDTH; j++) {
+                if (boardState[i][j].hasMonster()) {ret = i;}
+            }
+        }
         return ret;
     }
 
