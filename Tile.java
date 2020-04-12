@@ -9,12 +9,39 @@ public abstract class Tile {
     public static final String ANSI_PURPLE = "\u001B[35m";
     public static final String ANSI_CYAN = "\u001B[36m";
     public static final String ANSI_WHITE = "\u001B[37m";
+    private Player play = null;
+    private Monster monst = null;
+
+    public Player getPlay() {
+        return play;
+    }
+
+    public void setPlay(Player play) {
+        this.play = play;
+    }
+
+    public Monster getMonst() {
+        return monst;
+    }
+
+    public void setMonst(Monster monst) {
+        this.monst = monst;
+    }
+
+    public boolean hasPlayer(){
+        return play != null;
+    }
+
+    public boolean hasMonster(){
+        return monst != null;
+    }
 
     public abstract boolean passable();
 
     public abstract void steppedOn(Player p);
 
     public abstract String getSymbol();
+
 
 
 }

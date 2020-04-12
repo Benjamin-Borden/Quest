@@ -12,6 +12,6 @@ public class BlockingTile extends Tile {
 
     @Override
     public String getSymbol() {
-        return ANSI_RED+'X'+ANSI_RESET;
+        return ANSI_RED+'I'+ANSI_RESET;
     }
 }

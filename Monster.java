@@ -3,6 +3,9 @@ public abstract class Monster extends LivingEntity{
 
     private int damage, defense, dodge;
     private static final double DIFFICULTY = 0.02;
+
+    private int monstInt = -1;
+
     public Monster(String n, int l, int da, int de, int dod) {
         super(n, l);
         setDamage(da);
@@ -37,6 +40,17 @@ public abstract class Monster extends LivingEntity{
         return Math.random()*100<dodge;
     }
 
+    public int getMonstInt() {
+        return monstInt;
+    }
+
+    public void setMonstInt(int monstInt) {
+        this.monstInt = monstInt;
+    }
+
+    public boolean hasMonstInt(){
+        return monstInt != -1;
+    }
     @Override
     public int regularDamage() {
         return (int) (damage*DIFFICULTY);

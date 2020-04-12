@@ -23,13 +23,15 @@ public class Game {
         players = createPlayer();
         setPlayers(players);
         Board board = new Board(8,8,this);
-
+        System.out.println("Use wasd to move around! the i key will open your inventory and e will let you drink a potion or equip a weapon or armor!");
+        System.out.println("Red X's are unpassable, Green triangles are common tiles where you might meet monsters, and blue M's are markets where you can buy things");
+        System.out.println("Your heroes are the gold H!");
 
 
         boolean continuePlaying = true;
         do{
             System.out.println(board);
-            char input = Input.getChar(new char[]{'W','w','A','a','S','s','D','d','I','i','Q','q'});
+            char input = Input.getChar(new char[]{'W','w','A','a','S','s','D','d','I','i','Q','q','e','E'});
 
             if(Character.toUpperCase(input)=='Q'){
                 continuePlaying = false;
@@ -37,13 +39,15 @@ public class Game {
             }else if(Character.toUpperCase(input)=='I'){
                 displayEntities(heroes);
             }else if(Character.toUpperCase(input)=='W'){
-                board.move(-1,0);
+                board.move(-1,0,0);
             }else if(Character.toUpperCase(input)=='A'){
-                board.move(0,-1);
+                board.move(0,-1,0);
             }else if(Character.toUpperCase(input)=='S'){
-                board.move(1,0);
+                board.move(1,0,0);
             }else if(Character.toUpperCase(input)=='D'){
-                board.move(0,1);
+                board.move(0,1,0);
+            }else if(Character.toUpperCase(input)=='E'){
+                equipOrDrink();
             }
             //System.out.println(board);
         }while(continuePlaying);
@@ -112,6 +116,82 @@ public class Game {
         }
     }
 
+
+    public void equipOrDrink(){
+        System.out.println("Which hero would like to perform this action?");
+        Hero[] h= players[0].getParty();
+        int i = 1;
+        for(Hero ele: h){
+            System.out.println(i++ +": "+ele.getName());
+        }
+        int input = Input.getInt(1,h.length);
+        System.out.println("Do you want to equip something or drink a potion? (e/d)");
+        char input2 = Input.getChar(new char[]{'d','D','e','E'});
+        if(Character.toUpperCase(input2)=='D'){
+            drinkPotion((players[0].getParty()[input-1]));
+        }else{
+            equipWeaponOrArmor((players[0].getParty()[input-1]));
+        }
+    }
+
+    public boolean drinkPotion(Hero hero){
+
+        ArrayList<Potion> potions = new ArrayList<Potion>();
+
+        for(int i = 0;i<hero.getBackpack().size();i++){
+            if(hero.getBackpack().get(i) instanceof Potion){
+                potions.add((Potion) hero.getBackpack().get(i));
+            }
+        }
+        if(potions.size()==0){
+            System.out.println("You have no potions");
+            return false;
+        }
+        System.out.println("What potion would you like to use?:");
+        int count = 1;
+        for(Potion p: potions){
+
+            System.out.println(""+ count++ +": "+ p);
+        }
+        int input = Input.getInt(1,potions.size());
+        potions.get(input-1).takeAffect(hero);
+        System.out.println("You drank a "+potions.get(input-1).getName()+"!");
+        return true;
+    }
+    public boolean equipWeaponOrArmor(Hero hero){
+        ArrayList<Item> equipment = new ArrayList<Item>();
+
+        for(int i = 0;i<hero.getBackpack().size();i++){
+            if(hero.getBackpack().get(i) instanceof Armor || hero.getBackpack().get(i) instanceof Weaponry){
+                equipment.add( hero.getBackpack().get(i));
+            }
+        }
+
+        if(equipment.size()==0){
+            System.out.println("You have no weapons or armor!");
+            return false;
+        }
+
+        System.out.println("What would you like to equip?:");
+        int count = 1;
+        for(Item it: equipment){
+
+            System.out.println(""+ count++ +": "+ it);
+        }
+        int input = Input.getInt(1,equipment.size());
+
+        if(equipment.get(input-1).equals(hero.getArmor())||equipment.get(input-1).equals(hero.getWeapon())){
+            System.out.println("You already have this equipped!");
+            return false;
+        }
+
+        if(equipment.get(input-1) instanceof Weaponry){
+            hero.setWeapon((Weaponry) equipment.get(input-1));
+        }else if(equipment.get(input-1) instanceof Armor){
+            hero.setArmor((Armor) equipment.get(input-1));
+        }
+        return true;
+    }
     public void importData() throws FileNotFoundException {
 
         ArrayList<Entity> temp = new ArrayList<Entity>();
@@ -238,7 +318,7 @@ public class Game {
             String[] arr = splitted(s.nextLine());
             temp.add(new Spell(arr[0],Integer.parseInt(arr[1]),Integer.parseInt(arr[2]),Integer.parseInt(arr[3]),Integer.parseInt(arr[4]),"Lightning"));
         }
-        
+
         spells = Arrays.copyOf(temp.toArray(),temp.toArray().length,Spell[].class);
 
     }

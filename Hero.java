@@ -24,7 +24,7 @@ public abstract class Hero extends LivingEntity{
                 "\n\t Dexterity\t= " + getDexterity() +
                 "\n\t Money =\t" + getDexterity() +
                 "\n\t Experience =\t" + getCurrentExperience()+"/" +(10*getLevel())+
-                "\n\t Backpack =\t" + getBackpack().toString();
+                "\n\t Backpack =\t" + getbp();
     }
 
     public Hero(String n, int l, int tm, int s, int a, int dex, int mo, int ex){
@@ -42,6 +42,15 @@ public abstract class Hero extends LivingEntity{
 
     public ArrayList<Item> getBackpack() {
         return backpack;
+    }
+
+    public String getbp(){
+      String rtrn = "[";
+      for(Item i: backpack){
+        rtrn += i.getName()+",";
+      }
+      rtrn+="]";
+      return rtrn;
     }
 
     public void displayBackpack(){

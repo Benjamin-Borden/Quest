@@ -80,6 +80,9 @@ public class Board {
         }
     }
 
+    public Board(){
+
+    }
 
     //represent the board
     public String toString(){
@@ -123,10 +126,11 @@ public class Board {
         return output;
 
     }
-    public void move(int offseth, int offsetw){
-        moveTo(playerLocs[0][0]+offseth,playerLocs[0][1]+offsetw);
+    //moves a hero based on an offset of current value
+    public void move(int offseth, int offsetw,int player){
+        moveTo(playerLocs[0][0]+offseth,playerLocs[0][1]+offsetw,player);
     }
-    private boolean moveTo(int h,int w){
+    private boolean moveTo(int h,int w,int player){
         if(h<0 || w<0 || h>boardHeight-1 || w> boardWidth-1 || !boardState[h][w].passable()){
             System.out.println("You can not move here.");
             return false;
@@ -134,7 +138,7 @@ public class Board {
         playerLocs[0][0]=h;
         playerLocs[0][1]=w;
         //System.out.println(this);
-        boardState[h][w].steppedOn(game.getPlayers()[0]);
+        boardState[h][w].steppedOn(game.getPlayers()[player]);
         return true;
     }
     //check if a string a number

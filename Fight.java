@@ -281,7 +281,7 @@ public class Fight {
             return false;
         }
 
-        System.out.println("What spell would you like to use?:");
+        System.out.println("What armor would you like to equip?:");
         int count = 1;
         for(Item it: equipment){
 
