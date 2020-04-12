@@ -16,4 +16,9 @@ public class KoulouTile extends BoostTile {
     public void removeBoost(Hero h) {
         h.setStrength(originalSkill);
     }
+
+    @Override
+    public String getSymbol() {
+        return ANSI_CYAN+"K"+ANSI_RESET;
+    }
 }
