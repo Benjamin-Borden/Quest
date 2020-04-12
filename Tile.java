@@ -16,7 +16,7 @@ public abstract class Tile {
         return hero;
     }
 
-    public void setHero(Player play) {
+    public void setHero(Hero hero) {
         this.hero = hero;
     }
 
