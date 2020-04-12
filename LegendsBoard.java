@@ -3,6 +3,7 @@ import java.util.Random;
 public class LegendsBoard extends Board{
 
     private final int NUM_LANES = 3;
+    private final int LANE_WIDTH = 2;
 
     public LegendsBoard(Game g) {
         boardState = new Tile[8][8];
@@ -16,16 +17,28 @@ public class LegendsBoard extends Board{
     }
 
     public void teleport(int heroID) {
-        // asks player where they want hero to teleport to and moves them there if valid
-        // todo: complete me (with validTeleport() function)
+        boolean accepted = false;
+        int col;
+        int row;
+        do {
+            System.out.println("Which column would you like to teleport to? (from 0 to " + (boardWidth-1) + ")");
+            col = Input.getInt(0,boardWidth-1);
+            System.out.println("Which row would you like to teleport to? (from 0 to " + (boardHeight-1) + ")");
+            row = Input.getInt(0,boardHeight-1);
+            if (validTeleport(row, col, heroID)) { accepted=true;}
+            else {System.out.println("Remember, you cannot teleport within your own lane, and you cannot teleport past the last monster in your target lane. Try again.");}
+        } while (accepted == false);
+        moveTo(row, col, heroID);
     }
 
     public void back(int heroID) {
         // moves hero back to the nexus
         // randomizes which nexus spot it is
         Random random = new Random();
-        int randomCell = random.nextInt(2);
+
+        int randomCell = random.nextInt(LANE_WIDTH);
         int[] position = playerLocs[heroID];
+
         int nexusCell = ((getLane(position[1])-1)*NUM_LANES) + randomCell;
         moveTo(boardHeight-1, nexusCell, heroID);
     }
@@ -45,14 +58,29 @@ public class LegendsBoard extends Board{
     }
 
     public boolean validMove(int row, int col) {
-        // not inaccessible space
-        // not past monster in that lane
-        // todo complete
-        return false;
+        boolean ret = true;
+        Tile moveToTile = boardState[row][col];
+        if (!moveToTile.passable()) {ret = false;}
+        // can't go past monster in lane
+        else if (row<monsterLoc(getLane(col))) {ret = false;}
+        return ret;
+
     }
 
     public int getLane(int col) {
         int ret = (col / 3) + 1; // integer division
+        return ret;
+    }
+
+    public int monsterLoc(int lane) {
+        // given lane, returns row of last monster (closest to hero nexus)
+        // if no monsters in lane, returns -1
+        int ret = -1;
+        for (int i=0; i<boardHeight; i++) {
+            for (int j=0; j<LANE_WIDTH; j++) {
+                if (boardState[i][j].hasMonster()) {ret = i;}
+            }
+        }
         return ret;
     }
 
