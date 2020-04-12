@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class LegendsBoard extends Board{
 
     public LegendsBoard(Game g) {
@@ -9,6 +11,16 @@ public class LegendsBoard extends Board{
                 boardState[i]= new Tile[]{new BlockingTile(),new BlockingTile(),new BlockingTile(),new BlockingTile(),new BlockingTile(),new BlockingTile(),new BlockingTile(),new BlockingTile()};
             }
         }
+    }
+
+    public void teleport() {
+        // asks player where they want to teleport to and moves them there if valid
+        // todo: complete me (with validMove() function)
+    }
+
+    public void back() {
+        // moves player back to the nexus
+        // todo: complete me
     }
 
     public String toString(){
@@ -49,4 +61,5 @@ public class LegendsBoard extends Board{
         return output;
 
     }
+
 }

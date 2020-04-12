@@ -4,22 +4,22 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class Game {
-    private Hero[] heroes;
-    private Monster[] monsters;
-    private Weaponry[] weapons;
-    private Potion[] potions;
-    private Armor[] armor;
-    private Spell[] spells;
-    private Player[] players;
-    private Board board;
+public class Game<T extends Board> {
+    protected Hero[] heroes;
+    protected Monster[] monsters;
+    protected Weaponry[] weapons;
+    protected Potion[] potions;
+    protected Armor[] armor;
+    protected Spell[] spells;
+    protected Player[] players;
+    protected T board;
 
     public Game() throws FileNotFoundException {
         importData();
         startGame();
     }
 
-    private void startGame() {
+    protected void startGame() {
         players = createPlayer();
         setPlayers(players);
         Board board = new Board(8,8,this);
