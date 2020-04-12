@@ -46,6 +46,7 @@ public class LegendsBoard extends Board{
     public boolean validMove(int row, int col) {
         // not inaccessible space
         // not past monster in that lane
+        // todo complete
     }
 
     public int getLane(int col) {
