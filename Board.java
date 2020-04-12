@@ -130,7 +130,7 @@ public class Board {
     public void move(int offseth, int offsetw,int player){
         moveTo(playerLocs[0][0]+offseth,playerLocs[0][1]+offsetw,player);
     }
-    private boolean moveTo(int h,int w,int player){
+    protected boolean moveTo(int h,int w,int player){
         if(h<0 || w<0 || h>boardHeight-1 || w> boardWidth-1 || !boardState[h][w].passable()){
             System.out.println("You can not move here.");
             return false;
