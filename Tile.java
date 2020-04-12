@@ -9,15 +9,15 @@ public abstract class Tile {
     public static final String ANSI_PURPLE = "\u001B[35m";
     public static final String ANSI_CYAN = "\u001B[36m";
     public static final String ANSI_WHITE = "\u001B[37m";
-    private Player play = null;
+    private Hero hero = null;
     private Monster monst = null;
 
-    public Player getPlay() {
-        return play;
+    public Hero getHero() {
+        return hero;
     }
 
-    public void setPlay(Player play) {
-        this.play = play;
+    public void setHero(Player play) {
+        this.hero = hero;
     }
 
     public Monster getMonst() {
@@ -28,8 +28,8 @@ public abstract class Tile {
         this.monst = monst;
     }
 
-    public boolean hasPlayer(){
-        return play != null;
+    public boolean hasHero(){
+        return hero != null;
     }
 
     public boolean hasMonster(){
