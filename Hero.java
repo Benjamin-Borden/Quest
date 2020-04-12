@@ -5,6 +5,7 @@ public abstract class Hero extends LivingEntity{
     private int totalMana, currentMana, strength, agility, dexterity, money, currentExperience;
     private Weaponry weapon;
     private Armor armor;
+    private int heroID = -1;
 
 
 
@@ -27,6 +28,13 @@ public abstract class Hero extends LivingEntity{
                 "\n\t Backpack =\t" + getbp();
     }
 
+
+
+    public Hero(String n, int l, int tm, int s, int a, int dex, int mo, int ex, int id){
+        this(n,l,tm,s,a,dex,mo,ex);
+        heroID = id;
+    }
+
     public Hero(String n, int l, int tm, int s, int a, int dex, int mo, int ex){
         super(n,l);
         setTotalMana(tm);
@@ -37,11 +45,18 @@ public abstract class Hero extends LivingEntity{
         setMoney(mo);
         setCurrentExperience(ex);
     }
-
     //getters and setters
 
     public ArrayList<Item> getBackpack() {
         return backpack;
+    }
+
+    public int getHeroID() {
+        return heroID;
+    }
+
+    public void setHeroID(int heroID) {
+        this.heroID = heroID;
     }
 
     public String getbp(){
