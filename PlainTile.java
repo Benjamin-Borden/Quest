@@ -8,4 +8,8 @@ public class PlainTile extends BoostTile{
     public void removeBoost(Hero h) {
 
     }
+
+    public String getSymbol(){
+        return "P";
+    }
 }

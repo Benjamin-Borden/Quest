@@ -10,7 +10,7 @@ public class Nexus extends Market {
             this.team = team;
         }
         catch(Exception e) {
-            System.out.println("Team must be either hero or monster.")
+            System.out.println("Team must be either hero or monster.");
         }
         this.team = team;
     }
@@ -26,8 +26,9 @@ public class Nexus extends Market {
     public boolean heroWin() {
         boolean ret = false;
         if (team.equals("monster")) {
-
+            if (this.hasMonster()) {ret = true;}
         }
+        return ret;
     }
 
     public void spawnMonster(Monster[] monsters) {

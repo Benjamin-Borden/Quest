@@ -9,4 +9,8 @@ public class BushTile extends BoostTile {
     public void removeBoost(Hero h) {
         h.setDexterity(originalSkill);
     }
+
+    public String getSymbol(){
+        return ANSI_GREEN+"B"+ANSI_RESET;
+    }
 }

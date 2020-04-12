@@ -9,4 +9,8 @@ public class CaveTile extends BoostTile {
     public void removeBoost(Hero h) {
         h.setAgility(originalSkill);
     }
+
+    public String getSymbol(){
+        return ANSI_PURPLE+"C"+ANSI_RESET;
+    }
 }

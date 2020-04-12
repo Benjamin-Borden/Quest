@@ -146,22 +146,27 @@ public class LegendsBoard extends Board{
             throw new IllegalArgumentException("Team must be either hero or monster.");
         }
         boolean ret = false;
-        int row; = HERO_NEXUS_ROW;
+        int row = HERO_NEXUS_ROW;
         int col;
 
         if (team.equals("hero")) {row = MONSTER_NEXUS_ROW;}
-        else if (team.equals("monster") {row = HERO_NEXUS_ROW;}
+        else if (team.equals("monster")) { row = HERO_NEXUS_ROW; }
         
         for (int lane = 0; lane<NUM_LANES; lane++) {
             for (int offset=0; offset<LANE_WIDTH; offset++) {
                 col = (lane*(LANE_WIDTH+1))+offset;
-                Tile curr = boardState[row][col];
-                if (team.equals("hero")) {
-                    if (curr.heroWin()) {ret = true;}
+                Nexus curr;
+                if(boardState[row][col] instanceof Nexus){
+                    curr = (Nexus) boardState[row][col];
+                    if (team.equals("hero")) {
+                        if (curr.heroWin()) {ret = true;}
+                    }
+                    else if (team.equals("monster")){
+                        if (curr.monsterWin()) {ret = true;}
+                    }
                 }
-                else if (team.equals("monster") {
-                    if (curr.monsterWin()) {ret = true;}
-                } 
+
+
             }
         }
         return ret;
