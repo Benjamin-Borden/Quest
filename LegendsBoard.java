@@ -17,8 +17,18 @@ public class LegendsBoard extends Board{
     }
 
     public void teleport(int heroID) {
-        // asks player where they want hero to teleport to and moves them there if valid
-        // todo: complete me (with validTeleport() function)
+        boolean accepted;
+        int col;
+        int row;
+        do {
+            System.out.println("Which column would you like to teleport to? (from 0 to " + boardWidth-1 + ")");
+            col = Input.getInt(0,boardWidth-1);
+            System.out.println("Which row would you like to teleport to? (from 0 to " + boardHeight-1 + ")");
+            row = Input.getInt(0,rowHeight-1)
+            if (validTeleport(row, col, heroID)) { accepted=true;}
+            else {System.out.println("Remember, you cannot teleport within your own lane, and you cannot teleport past the last monster in your target lane. Try again.");}
+        } while (accepted == false;)
+        moveTo(row, col, heroID);
     }
 
     public void back(int heroID) {
