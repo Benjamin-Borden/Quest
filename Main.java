@@ -8,8 +8,8 @@ public class Main {
         //System.out.println(h.getName());
         //h.offsetLife(-50);
         //System.out.println(h.getCurrentHealth());
-        Game g = null;
-        LegendsBoard b = new LegendsBoard(g);
-        System.out.println(b);
+        Game g = new LegendsGame();
+        //LegendsBoard b = new LegendsBoard(g);
+        //System.out.println(b);
     }
 }
