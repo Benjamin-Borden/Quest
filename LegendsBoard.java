@@ -2,9 +2,10 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class LegendsBoard extends Board{
-
     private final int NUM_LANES = 3;
     private final int LANE_WIDTH = 2;
+    private final int HERO_NEXUS_ROW = boardHeight-1;
+    private final int MONSTER_NEXUS_ROW = 0;
 
     public LegendsBoard(Game g) {
         boardState = new Tile[8][8];
@@ -48,7 +49,7 @@ public class LegendsBoard extends Board{
         int[] position = playerLocs[heroID];
 
         int nexusCell = ((getLane(position[1])-1)*NUM_LANES) + randomCell;
-        moveTo(boardHeight-1, nexusCell, heroID);
+        moveTo(HERO_NEXUS_ROW, nexusCell, heroID);
     }
 
     public boolean validTeleport(int row, int col, int heroID) {
@@ -75,8 +76,9 @@ public class LegendsBoard extends Board{
 
     }
 
+    // start counting at 1, 2, etc.
     public int getLane(int col) {
-        int ret = (col / 3) + 1; // integer division
+        int ret = (col / (LANE_WIDTH+1)) + 1; // integer division
         return ret;
     }
 
@@ -129,6 +131,40 @@ public class LegendsBoard extends Board{
         }
         return output;
 
+    }
+
+    public boolean monsterWin() {
+        return checkWinFor("monster");
+    }
+
+    public boolean heroWin() {
+        return checkWinFor("hero");
+    }
+
+    private boolean checkWinFor(String team) {
+        if (!team.equals("hero") || !team.equals("monster")) {
+            throw new IllegalArgumentException("Team must be either hero or monster.");
+        }
+        boolean ret = false;
+        int row; = HERO_NEXUS_ROW;
+        int col;
+
+        if (team.equals("hero")) {row = MONSTER_NEXUS_ROW;}
+        else if (team.equals("monster") {row = HERO_NEXUS_ROW;}
+        
+        for (int lane = 0; lane<NUM_LANES; lane++) {
+            for (int offset=0; offset<LANE_WIDTH; offset++) {
+                col = (lane*(LANE_WIDTH+1))+offset;
+                Tile curr = boardState[row][col];
+                if (team.equals("hero")) {
+                    if (curr.heroWin()) {ret = true;}
+                }
+                else if (team.equals("monster") {
+                    if (curr.monsterWin()) {ret = true;}
+                } 
+            }
+        }
+        return ret;
     }
 
 }

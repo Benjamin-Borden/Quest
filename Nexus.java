@@ -43,4 +43,9 @@ public class Nexus extends Market {
             this.setHero(h);
         }
     }
+
+    @Override
+    public String getSymbol() {
+        return ANSI_BLUE+'N'+ANSI_RESET;
+    }
 }
