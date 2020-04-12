@@ -36,6 +36,14 @@ public abstract class Tile {
         return monst != null;
     }
 
+    public boolean occupied(LivingEntity e){
+        if(e instanceof Hero){
+            return hasHero();
+        }else if(e instanceof Monster){
+            return hasMonster();
+        }
+        return false;
+    }
     public abstract boolean passable();
 
     public abstract void steppedOn(Player p);

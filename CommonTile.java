@@ -5,6 +5,7 @@ public class CommonTile extends Tile {
     public CommonTile(Monster[] mons){
         setMonsters(mons);
     }
+    public CommonTile(){}
     public void steppedOn(Player p) {
         int monsterLevel = p.getHighestLevel();
         int numMonsters = p.getParty().length;
