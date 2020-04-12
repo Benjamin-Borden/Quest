@@ -36,9 +36,9 @@ public class Board {
     //used to adjust the tile shape to fit numbers
     private int lengthOfTiles;
 
-    private int[][] playerLocs;
+    protected int[][] playerLocs;
 
-    private Game game;
+    protected Game game;
     //create a board of dynamic size
     public Board(int h, int w, Game g){
         boardHeight = h;

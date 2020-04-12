@@ -1,10 +1,16 @@
+import java.io.FileNotFoundException;
+
 public class LegendsGame extends Game<LegendsBoard> {
+
+    public LegendsGame() throws FileNotFoundException {
+        super();
+    }
 
     @Override
     protected void startGame() {
         players = createPlayer();
         setPlayers(players);
-        LegendsBoard board = new Board(8,8,this);
+        LegendsBoard board = new LegendsBoard(this);
         System.out.println("Use wasd to move around! the i key will open your inventory and e will let you drink a potion or equip a weapon or armor!");
         System.out.println("Red X's are unpassable, Green triangles are common tiles where you might meet monsters, and blue M's are markets where you can buy things");
         System.out.println("Your heroes are the gold H!");
@@ -35,9 +41,9 @@ public class LegendsGame extends Game<LegendsBoard> {
                     board.move(0,1,i);
                 }else if(Character.toUpperCase(input)=='E'){
                     equipOrDrink(i);
-                }else if(Character.toUpperCase(input)=="T") {
+                }else if(Character.toUpperCase(input)=='T') {
                     board.teleport(i);
-                }else if(Character.toUpperCase(input)=="B") {
+                }else if(Character.toUpperCase(input)=='B') {
                     board.back(i);
                 }
             }

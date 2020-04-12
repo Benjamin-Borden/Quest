@@ -24,7 +24,7 @@ public class Game<T extends Board> {
         setPlayers(players);
         Board board = new Board(8,8,this);
         System.out.println("Use wasd to move around! the i key will open your inventory and e will let you drink a potion or equip a weapon or armor!");
-        System.out.println("Red X's are unpassable, Green triangles are common tiles where you might meet monsters, and blue M's are markets where you can buy things");
+        System.out.println("Red I's are unpassable, Green triangles are common tiles where you might meet monsters, and blue M's are markets where you can buy things");
         System.out.println("Your heroes are the gold H!");
 
 
@@ -53,7 +53,7 @@ public class Game<T extends Board> {
         }while(continuePlaying);
     }
 
-    private Player[] createPlayer() {
+    Player[] createPlayer() {
         System.out.println( "Hello Adventurer, and welcome to Quest! In this game you can travel a map, battle monsters, \n" +
                             "go to markets, and level up your character. First, you must chose a group of heroes to lead!\n");
         System.out.println("What is your name? (No spaces)");

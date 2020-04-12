@@ -25,18 +25,19 @@ public class LegendsBoard extends Board{
         // randomizes which nexus spot it is
         Random random = new Random();
         int randomCell = random.nextInt(2);
-        int position = playerLocs[heroID];
+        int[] position = playerLocs[heroID];
         int nexusCell = ((getLane(position[1])-1)*NUM_LANES) + randomCell;
         moveTo(boardHeight-1, nexusCell, heroID);
     }
 
     public boolean validTeleport(int row, int col, int heroID) {
         boolean ret = true;
-        if !validMove(row, col) {
+        int[] position = playerLocs[heroID];
+        if (!validMove(row, col)){
             ret = false;
         }
         // can't teleport into same lane
-        int[] position = playerLocs[heroID];
+
         else if (getLane(position[1])==getLane(col)) {
             ret = false;
         }
@@ -47,6 +48,7 @@ public class LegendsBoard extends Board{
         // not inaccessible space
         // not past monster in that lane
         // todo complete
+        return false;
     }
 
     public int getLane(int col) {
