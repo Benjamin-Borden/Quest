@@ -50,6 +50,7 @@ public class LegendsBoard extends Board{
     }
 
     private <T extends BoostTile> T getRandomTile() {
+        // returns random boostTile
         T ret;
         double perc = Math.random();
         if(perc<PERCENT_BUSH){
