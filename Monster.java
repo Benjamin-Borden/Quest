@@ -1,7 +1,13 @@
 
 public abstract class Monster extends LivingEntity{
 
-    private int damage, defense, dodge;
+    private int damage;
+    private int defense;
+    private int dodge;
+
+
+
+    private int lane;
     private static final double DIFFICULTY = 0.02;
 
     private int monstInt = -1;
@@ -40,9 +46,18 @@ public abstract class Monster extends LivingEntity{
         return Math.random()*100<dodge;
     }
 
+    public int getLane() {
+        return lane;
+    }
+
+    public void setLane(int lane) {
+        this.lane = lane;
+    }
+
     public int getMonstInt() {
         return monstInt;
     }
+
 
     public void setMonstInt(int monstInt) {
         this.monstInt = monstInt;
@@ -68,4 +83,5 @@ public abstract class Monster extends LivingEntity{
         setCurrentHealth(getCurrentHealth()-damage);
         System.out.println(getCurrentHealth());
     }
+
 }

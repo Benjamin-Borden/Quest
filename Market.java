@@ -18,7 +18,7 @@ public class Market extends Tile {
     public void displayInventory(){
         int i = 1;
         for(Item it : inventory){
-            System.out.println(i++ +": "+it);
+            System.out.println(i++ +": "+it+" Cost: "+it.getCost()+" Level Requirement: "+it.getRequiredLevel());
         }
     }
 
@@ -35,9 +35,15 @@ public class Market extends Tile {
             System.out.println(keeper+": Would you like to buy or sell something? (y/n)");
             char input;
             if(Character.toUpperCase(Input.getChar(new char[]{'Y','y','N','n'})) =='Y'){
-                System.out.println(keeper+": Who would like to buy/sell?");
-                p.displayParty();
-                int input2 = Input.getInt(1,p.getParty().length);
+                int input2 = 1;
+                if(p.getParty().length!=1){
+                    System.out.println(keeper+": Who would like to buy/sell?");
+                    p.displayParty();
+                    input2 = Input.getInt(1,p.getParty().length);
+                }else{
+                    p.displayParty();
+                }
+
                 Hero h = p.getParty()[input2-1];
                 System.out.println(keeper+": Hello "+h.getName()+", would you like to buy or sell something? (b/s)");
 

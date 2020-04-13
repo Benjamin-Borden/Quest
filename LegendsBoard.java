@@ -126,7 +126,7 @@ public class LegendsBoard extends Board{
                     }
 
                     if(t.hasMonster()){
-                        out2+="M"+t.getMonst().getMonstInt()+" ";
+                        out2+=ANSI_RED+"M"+(t.getMonst().getLane()+1)+ANSI_RESET+" ";
                     }else{
                         out2+="   ";
                     }
@@ -180,4 +180,36 @@ public class LegendsBoard extends Board{
         return ret;
     }
 
+    public void spawnMonsters() {
+        Monster[] mons = new Monster[NUM_LANES];
+        int monsterLevel = game.getPlayers()[0].getHighestLevel();
+        int numMonsters = game.getPlayers()[0].getParty().length;
+        Monster[] temp = game.monsters.clone();
+        Random random = new Random();
+
+        for(int i = 0;i<numMonsters;i++){
+            for(int o = 0;o<temp.length;o++){
+                if(temp[o] != null && temp[o].getLevel()==monsterLevel){
+
+                    if(temp[o].getClass().toString().equals("class Exosleleton")){
+                        mons[i] = new Exosleleton(temp[o].getName(),temp[o].getLevel(),temp[o].getDamage(),temp[o].getDefense(),temp[o].getDodge());
+                    } else if(temp[o].getClass().toString().equals("class Spirit")){
+                        mons[i] = new Spirit(temp[o].getName(),temp[o].getLevel(),temp[o].getDamage(),temp[o].getDefense(),temp[o].getDodge());
+                    }else if(temp[o].getClass().toString().equals("class Dragon")){
+                        mons[i] = new Dragon(temp[o].getName(),temp[o].getLevel(),temp[o].getDamage(),temp[o].getDefense(),temp[o].getDodge());
+                    }else{
+                        mons[i] = null;
+                    }
+                    temp[o]=null;
+                    break;
+                }
+            }
+        }
+        int counter = 0;
+        for(Monster m: mons){
+            m.setLane(counter);
+            boardState[MONSTER_NEXUS_ROW][random.nextInt(2)+(counter*(LANE_WIDTH+1))].setMonst(m);
+            counter++;
+        }
+    }
 }
