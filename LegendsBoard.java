@@ -6,6 +6,7 @@ public class LegendsBoard extends Board{
     private final int LANE_WIDTH = 2;
     private int HERO_NEXUS_ROW;
     private int MONSTER_NEXUS_ROW = 0;
+    private int[][] monsterLocs = {{-1,-1},{-1,-1},{-1,-1}};
 
     public LegendsBoard(Game g) {
         boardState = new Tile[8][8];
@@ -89,7 +90,26 @@ public class LegendsBoard extends Board{
         int ret = (col / (LANE_WIDTH+1)) + 1; // integer division
         return ret;
     }
+    public int[][] getMonsterLocs() {
+        return monsterLocs;
+    }
 
+    public void setMonsterLocs(int[][] monsterLocs) {
+        this.monsterLocs = monsterLocs;
+    }
+    public void monsterActions(){
+        for(int i =0;i< monsterLocs.length;i++){
+            Monster m = boardState[monsterLocs[i][0]][monsterLocs[i][1]].getMonst();
+            if(!boardState[monsterLocs[i][0]+1][monsterLocs[i][1]].occupied(m)){
+                boardState[monsterLocs[i][0]+1][monsterLocs[i][1]].setMonst(boardState[monsterLocs[i][0]][monsterLocs[i][1]].getMonst());
+                boardState[monsterLocs[i][0]][monsterLocs[i][1]].setMonst(null);
+                monsterLocs[i][0]=monsterLocs[i][0]+1;
+                if(boardState[monsterLocs[i][0]][monsterLocs[i][1]] instanceof Nexus){
+                    System.out.println("THE MONSTERS HAVE WON, GAME OVER.");
+                }
+            }
+        }
+    }
     public int monsterLoc(int lane) {
         // given lane, returns row of last monster (closest to hero nexus)
         // if no monsters in lane, returns -1
@@ -208,7 +228,8 @@ public class LegendsBoard extends Board{
         int counter = 0;
         for(Monster m: mons){
             m.setLane(counter);
-            boardState[MONSTER_NEXUS_ROW][random.nextInt(2)+(counter*(LANE_WIDTH+1))].setMonst(m);
+            monsterLocs[counter]=new int[]{MONSTER_NEXUS_ROW,random.nextInt(2)+(counter*(LANE_WIDTH+1))};
+            boardState[monsterLocs[counter][0]][monsterLocs[counter][1]].setMonst(m);
             counter++;
         }
     }

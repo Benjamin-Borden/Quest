@@ -2,6 +2,8 @@ import java.io.FileNotFoundException;
 
 public class LegendsGame extends Game<LegendsBoard> {
     static final int ROUNDS_BETWEEN_MONSTER_SPAWNS = 8;
+
+
     public LegendsGame() throws FileNotFoundException {
         super();
     }
@@ -27,7 +29,9 @@ public class LegendsGame extends Game<LegendsBoard> {
         do{
             if(roundCounter++%ROUNDS_BETWEEN_MONSTER_SPAWNS==0)
                 board.spawnMonsters();
+            board.monsterActions();
             System.out.println(board);
+
 
             // iterate through each hero in party for actions
             for(int i=0; i<players[0].getParty().length; i++) {
@@ -69,6 +73,8 @@ public class LegendsGame extends Game<LegendsBoard> {
 
         }while(continuePlaying);
     }
+
+
     // overload method
     public void equipOrDrink(int hero){
         System.out.println("Do you want to equip something or drink a potion? (e/d)");
