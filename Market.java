@@ -32,7 +32,7 @@ public class Market extends Tile {
         System.out.println(keeper+": Welcome to my market!");
         boolean contin = true;
         do{
-            System.out.println(keeper+": Would someone in your party like to buy or sell something? (y/n)");
+            System.out.println(keeper+": Would you like to buy or sell something? (y/n)");
             char input;
             if(Character.toUpperCase(Input.getChar(new char[]{'Y','y','N','n'})) =='Y'){
                 System.out.println(keeper+": Who would like to buy/sell?");

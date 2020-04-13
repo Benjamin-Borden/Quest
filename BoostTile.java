@@ -11,6 +11,15 @@ public abstract class BoostTile extends CommonTile {
         super(mons);
     }
 
+    public void steppedOn(Player p){
+        setHero(p.getParty()[p.getHeroTurn()]);
+        addBoost(p.getParty()[p.getHeroTurn()]);
+    }
+
+    public void steppedOff(Player p){
+        super.steppedOff(p);
+        removeBoost(p.getParty()[p.getHeroTurn()]);
+    }
     public abstract void addBoost(Hero h);
     public abstract void removeBoost(Hero h);
 }

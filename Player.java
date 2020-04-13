@@ -1,5 +1,11 @@
 public class Player extends Entity {
     private int playerID;
+    private int heroTurn;
+
+
+
+    private boolean isWinner = false;
+
     private Hero[] party;
 
 
@@ -15,6 +21,15 @@ public class Player extends Entity {
     public Player(Hero[] h){
         this("Guest",h);
     }
+
+    public int getHeroTurn() {
+        return heroTurn;
+    }
+
+    public void setHeroTurn(int heroTurn) {
+        this.heroTurn = heroTurn;
+    }
+
     public int getPlayerID() {
         return playerID;
     }
@@ -25,6 +40,14 @@ public class Player extends Entity {
 
     public Hero[] getParty() {
         return party;
+    }
+
+    public boolean isWinner() {
+        return isWinner;
+    }
+
+    public void setWinner(boolean winner) {
+        isWinner = winner;
     }
 
     public int getHighestLevel(){

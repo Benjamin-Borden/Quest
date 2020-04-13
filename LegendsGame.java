@@ -15,13 +15,20 @@ public class LegendsGame extends Game<LegendsBoard> {
         System.out.println("Red I's are unpassable, Green triangles are common tiles where you might meet monsters, and blue M's are markets where you can buy things");
         System.out.println("Your heroes are the gold H!");
 
+        players[0].setHeroTurn(0);
+        board.back(players[0].getHeroTurn());
+        players[0].setHeroTurn(1);
+        board.back(players[0].getHeroTurn());
+        players[0].setHeroTurn(2);
+        board.back(players[0].getHeroTurn());
 
         boolean continuePlaying = true;
         do{
             System.out.println(board);
+
             // iterate through each hero in party for actions
             for(int i=0; i<players[0].getParty().length; i++) {
-
+                players[0].setHeroTurn(i);
                 System.out.println(board);
 
                 System.out.println("What would " + players[0].getParty()[i].getName() + " like to do?");
@@ -48,6 +55,12 @@ public class LegendsGame extends Game<LegendsBoard> {
                     board.teleport(i);
                 }else if(Character.toUpperCase(input)=='B') {
                     board.back(i);
+                }
+                if(players[0].isWinner()){
+                    System.out.println(board);
+                    System.out.println("CONGRATULATIONS! YOU HAVE WON QUEST OF LEGENDS");
+                    continuePlaying= false;
+                    break;
                 }
             }
         }while(continuePlaying);

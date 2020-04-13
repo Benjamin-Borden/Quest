@@ -128,17 +128,19 @@ public class Board {
     }
     //moves a hero based on an offset of current value
     public void move(int offseth, int offsetw,int player){
-        moveTo(playerLocs[0][0]+offseth,playerLocs[0][1]+offsetw,player);
+        moveTo(playerLocs[player][0]+offseth,playerLocs[player][1]+offsetw,player);
     }
     protected boolean moveTo(int h,int w,int player){
         if(h<0 || w<0 || h>boardHeight-1 || w> boardWidth-1 || !boardState[h][w].passable()){
             System.out.println("You can not move here.");
             return false;
         }
-        playerLocs[0][0]=h;
-        playerLocs[0][1]=w;
+        boardState[playerLocs[player][0]][playerLocs[player][1]].steppedOff(game.getPlayers()[0]);
+        playerLocs[player][0]=h;
+        playerLocs[player][1]=w;
         //System.out.println(this);
-        boardState[h][w].steppedOn(game.getPlayers()[player]);
+        boardState[h][w].steppedOn(game.getPlayers()[0]);
+        System.out.println(playerLocs);
         return true;
     }
     //check if a string a number

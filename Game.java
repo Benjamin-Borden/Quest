@@ -83,6 +83,7 @@ public class Game<T extends Board> {
                     System.out.println("Hero already chosen, chose a different hero.");
                 }else {
                     temp.add(heroes[inp - 1]);
+                    heroes[inp-1].setHeroID(counter);
                     counter++;
                     heroes[inp - 1] = null;
                 }

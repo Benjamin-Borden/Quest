@@ -4,13 +4,17 @@ import java.util.Random;
 public class LegendsBoard extends Board{
     private final int NUM_LANES = 3;
     private final int LANE_WIDTH = 2;
-    private final int HERO_NEXUS_ROW = boardHeight-1;
-    private final int MONSTER_NEXUS_ROW = 0;
+    private int HERO_NEXUS_ROW;
+    private int MONSTER_NEXUS_ROW = 0;
 
     public LegendsBoard(Game g) {
         boardState = new Tile[8][8];
+        boardHeight = 8;
+        boardWidth = 8;
+        HERO_NEXUS_ROW = boardHeight-1;
         game = g;
         generateBoardState();
+        playerLocs = new int[][]{{0,0},{3,0},{6,0}};
     }
     private void generateBoardState(){
         Object[] temp = Input.flatten(new Item[][]{game.getPotions(),game.getArmor(),game.getWeapons(),game.getSpells()}).toArray();
@@ -47,8 +51,12 @@ public class LegendsBoard extends Board{
 
         int randomCell = random.nextInt(LANE_WIDTH);
         int[] position = playerLocs[heroID];
-
-        int nexusCell = ((getLane(position[1])-1)*NUM_LANES) + randomCell;
+        System.out.println("position: "+position.toString());
+        for(int i: position){
+            System.out.println(i);
+        }
+        int nexusCell = ((getLane(position[0])-1)*(LANE_WIDTH+1)) + randomCell;
+        System.out.println(""+HERO_NEXUS_ROW+nexusCell+heroID);
         moveTo(HERO_NEXUS_ROW, nexusCell, heroID);
     }
 
@@ -112,7 +120,7 @@ public class LegendsBoard extends Board{
                 }else{
                     out2+="| ";
                     if(t.hasHero()){
-                        out2+="H"+t.getHero().getHeroID()+" ";
+                        out2+=ANSI_YELLOW+"H"+(t.getHero().getHeroID()+1)+ANSI_RESET+" ";
                     }else{
                         out2+="   ";
                     }

@@ -46,8 +46,11 @@ public abstract class Tile {
     }
     public abstract boolean passable();
 
-    public abstract void steppedOn(Player p);
+    public void steppedOn(Player p){};
 
+    public void steppedOff(Player p){
+        setHero(null);
+    }
     public abstract String getSymbol();
 
 
