@@ -21,14 +21,6 @@ public class LegendsBoard extends Board{
     private void generateBoardState(){
         Object[] temp = Input.flatten(new Item[][]{game.getPotions(),game.getArmor(),game.getWeapons(),game.getSpells()}).toArray();
         Item[] items = Arrays.copyOf(temp,temp.length,Item[].class);
-        // boardState[0] = new Tile[]{new Nexus(items,"monster"),new Nexus(items,"monster"),new BlockingTile(),new Nexus(items,"monster"),new Nexus(items,"monster"),new BlockingTile(),new Nexus(items,"monster"),new Nexus(items,"monster")};
-        // boardState[1] = new Tile[]{new PlainTile(),new PlainTile(),new BlockingTile(),new CaveTile(),new PlainTile(),new BlockingTile(),new BushTile(),new BushTile()};
-        // boardState[2] = new Tile[]{new PlainTile(),new PlainTile(),new BlockingTile(),new PlainTile(),new PlainTile(),new BlockingTile(),new PlainTile(),new PlainTile()};
-        // boardState[3] = new Tile[]{new CaveTile(),new BushTile(),new BlockingTile(),new BushTile(),new KoulouTile(),new BlockingTile(),new KoulouTile(),new PlainTile()};
-        // boardState[4] = new Tile[]{new PlainTile(),new PlainTile(),new BlockingTile(),new BushTile(),new PlainTile(),new BlockingTile(),new PlainTile(),new BushTile()};
-        // boardState[5] = new Tile[]{new KoulouTile(),new KoulouTile(),new BlockingTile(),new KoulouTile(),new PlainTile(),new BlockingTile(),new PlainTile(),new PlainTile()};
-        // boardState[6] = new Tile[]{new PlainTile(),new PlainTile(),new BlockingTile(),new PlainTile(),new PlainTile(),new BlockingTile(),new PlainTile(),new PlainTile()};
-        // boardState[7] = new Tile[]{new Nexus(items,"hero"),new Nexus(items,"hero"),new BlockingTile(),new Nexus(items,"hero"),new Nexus(items,"hero"),new BlockingTile(),new Nexus(items,"hero"),new Nexus(items,"hero")};
         for (int row=0; row<boardHeight; row++) {
             for (int lane=0; lane<NUM_LANES; lane++) {
                 for (int offset=0; offset<LANE_WIDTH; offset++) {
