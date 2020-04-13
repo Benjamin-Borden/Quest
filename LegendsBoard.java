@@ -100,7 +100,27 @@ public class LegendsBoard extends Board{
     public void monsterActions(){
         for(int i =0;i< monsterLocs.length;i++){
             Monster m = boardState[monsterLocs[i][0]][monsterLocs[i][1]].getMonst();
-            if(!boardState[monsterLocs[i][0]+1][monsterLocs[i][1]].occupied(m)){
+            int heroH=-1, heroW =-1;
+            if(boardState[monsterLocs[i][0]][monsterLocs[i][1]].hasHero()){
+                heroH = monsterLocs[i][0];
+                heroW = monsterLocs[i][1];
+            }else if(monsterLocs[i][1]+1 != (NUM_LANES*LANE_WIDTH+(NUM_LANES-1)) && boardState[monsterLocs[i][0]][monsterLocs[i][1]+1].hasHero()){
+                heroH = monsterLocs[i][0];
+                heroW = monsterLocs[i][1]+1;
+            }else if(monsterLocs[i][1] != 0 && boardState[monsterLocs[i][0]][monsterLocs[i][1]-1].hasHero()){
+                heroH = monsterLocs[i][0];
+                heroW = monsterLocs[i][1]-1;
+            }else if(monsterLocs[i][0]+1 != (NUM_LANES*LANE_WIDTH+(NUM_LANES-1)) && boardState[monsterLocs[i][0]+1][monsterLocs[i][1]].hasHero()){
+                heroH = monsterLocs[i][0]+1;
+                heroW = monsterLocs[i][1];
+            }
+            if(heroH != -1){
+                int oldHealth, newHealth;
+                oldHealth = boardState[heroH][heroW].getHero().getCurrentHealth();
+                boardState[heroH][heroW].getHero().receiveDamage(boardState[monsterLocs[i][0]][monsterLocs[i][1]].getMonst().regularDamage());
+                newHealth = boardState[heroH][heroW].getHero().getCurrentHealth();
+                System.out.println(boardState[monsterLocs[i][0]][monsterLocs[i][1]].getMonst().getName()+" attacked "+boardState[heroH][heroW].getHero().getName()+" for "+(-1*(newHealth-oldHealth))+" points of damage!\n"+boardState[heroH][heroW].getHero().getName()+" is at "+ boardState[heroH][heroW].getHero().getCurrentHealth()+" HP!");
+            }else if(!boardState[monsterLocs[i][0]+1][monsterLocs[i][1]].occupied(m)){
                 boardState[monsterLocs[i][0]+1][monsterLocs[i][1]].setMonst(boardState[monsterLocs[i][0]][monsterLocs[i][1]].getMonst());
                 boardState[monsterLocs[i][0]][monsterLocs[i][1]].setMonst(null);
                 monsterLocs[i][0]=monsterLocs[i][0]+1;

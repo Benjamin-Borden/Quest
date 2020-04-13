@@ -10,7 +10,7 @@ public abstract class Monster extends LivingEntity{
     private int lane;
     private static final double DIFFICULTY = 0.02;
 
-    private int monstInt = -1;
+    //private int monstInt = -1;
 
     public Monster(String n, int l, int da, int de, int dod) {
         super(n, l);
@@ -54,18 +54,18 @@ public abstract class Monster extends LivingEntity{
         this.lane = lane;
     }
 
-    public int getMonstInt() {
-        return monstInt;
-    }
+    //public int getMonstInt() {
+     //   return monstInt;
+    //}
 
 
-    public void setMonstInt(int monstInt) {
-        this.monstInt = monstInt;
-    }
+    //public void setMonstInt(int monstInt) {
+     //   this.monstInt = monstInt;
+    //}
 
-    public boolean hasMonstInt(){
-        return monstInt != -1;
-    }
+    //public boolean hasMonstInt(){
+     //   return monstInt != -1;
+    //}
     @Override
     public int regularDamage() {
         return (int) (damage*DIFFICULTY);
