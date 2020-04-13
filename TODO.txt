@@ -48,3 +48,6 @@ Gameplay:
 
 Concrete TODO:
 - addBoost & removeBoost when player steps on & off tile
+- fighting capabilities when a hero is within range of a monster
+- initiate boardstate such that it randomizes where cave/koulou/bush/plain tiles are generated
+- check for valid move before moving hero on board 
