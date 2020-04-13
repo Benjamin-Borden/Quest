@@ -79,10 +79,7 @@ public class LegendsBoard extends Board{
 
         int randomCell = random.nextInt(LANE_WIDTH);
         int[] position = playerLocs[heroID];
-        System.out.println("position: "+position.toString());
-        for(int i: position){
-            System.out.println(i);
-        }
+
         int nexusCell = ((getLane(position[0])-1)*(LANE_WIDTH+1)) + randomCell;
         System.out.println(""+HERO_NEXUS_ROW+nexusCell+heroID);
         moveTo(HERO_NEXUS_ROW, nexusCell, heroID);
