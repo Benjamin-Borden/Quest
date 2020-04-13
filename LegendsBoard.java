@@ -4,6 +4,7 @@ import java.util.Random;
 public class LegendsBoard extends Board{
     private final int NUM_LANES = 3;
     private final int LANE_WIDTH = 2;
+    private final double PERCENT_BUSH = 0.1, PERCENT_CAVE = 0.1, PERCENT_KOULOU = 0.1;
     private int HERO_NEXUS_ROW;
     private int MONSTER_NEXUS_ROW = 0;
     private int[][] monsterLocs = {{-1,-1},{-1,-1},{-1,-1}};
@@ -20,16 +21,42 @@ public class LegendsBoard extends Board{
     private void generateBoardState(){
         Object[] temp = Input.flatten(new Item[][]{game.getPotions(),game.getArmor(),game.getWeapons(),game.getSpells()}).toArray();
         Item[] items = Arrays.copyOf(temp,temp.length,Item[].class);
-        boardState[0] = new Tile[]{new Nexus(items,"monster"),new Nexus(items,"monster"),new BlockingTile(),new Nexus(items,"monster"),new Nexus(items,"monster"),new BlockingTile(),new Nexus(items,"monster"),new Nexus(items,"monster")};
-        boardState[1] = new Tile[]{new PlainTile(),new PlainTile(),new BlockingTile(),new CaveTile(),new PlainTile(),new BlockingTile(),new BushTile(),new BushTile()};
-        boardState[2] = new Tile[]{new PlainTile(),new PlainTile(),new BlockingTile(),new PlainTile(),new PlainTile(),new BlockingTile(),new PlainTile(),new PlainTile()};
-        boardState[3] = new Tile[]{new CaveTile(),new BushTile(),new BlockingTile(),new BushTile(),new KoulouTile(),new BlockingTile(),new KoulouTile(),new PlainTile()};
-        boardState[4] = new Tile[]{new PlainTile(),new PlainTile(),new BlockingTile(),new BushTile(),new PlainTile(),new BlockingTile(),new PlainTile(),new BushTile()};
-        boardState[5] = new Tile[]{new KoulouTile(),new KoulouTile(),new BlockingTile(),new KoulouTile(),new PlainTile(),new BlockingTile(),new PlainTile(),new PlainTile()};
-        boardState[6] = new Tile[]{new PlainTile(),new PlainTile(),new BlockingTile(),new PlainTile(),new PlainTile(),new BlockingTile(),new PlainTile(),new PlainTile()};
-        boardState[7] = new Tile[]{new Nexus(items,"hero"),new Nexus(items,"hero"),new BlockingTile(),new Nexus(items,"hero"),new Nexus(items,"hero"),new BlockingTile(),new Nexus(items,"hero"),new Nexus(items,"hero")};
-
+        for (int row=0; row<boardHeight; row++) {
+            for (int lane=0; lane<NUM_LANES; lane++) {
+                for (int offset=0; offset<LANE_WIDTH; offset++) {
+                    int col = lane*(LANE_WIDTH+1)+offset;
+                    if (row==MONSTER_NEXUS_ROW) {
+                        boardState[row][col] = new Nexus(items, "monster");
+                    }else if (row==HERO_NEXUS_ROW) {
+                        boardState[row][col] = new Nexus(items, "hero");
+                    } else {
+                        boardState[row][col] = getRandomTile();
+                    }
+                }
+                // add nonaccessible tiles between lanes
+                if (lane!=(NUM_LANES-1)) {
+                    boardState[row][lane*(LANE_WIDTH+1)+LANE_WIDTH] = new BlockingTile();
+                }
+            }
+        }
     }
+
+    private <T extends BoostTile> T getRandomTile() {
+        // returns random boostTile
+        T ret;
+        double perc = Math.random();
+        if(perc<PERCENT_BUSH){
+            ret = (T) new BushTile();
+        }else if(perc<PERCENT_CAVE+PERCENT_BUSH){
+            ret = (T) new CaveTile();
+        }else if(perc<PERCENT_KOULOU+PERCENT_CAVE+PERCENT_BUSH) {
+            ret = (T) new KoulouTile();
+        }else{
+            ret = (T) new PlainTile();
+        }
+        return ret;
+    }
+
     public void teleport(int heroID) {
         boolean accepted = false;
         int col;

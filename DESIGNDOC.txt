@@ -1,0 +1,143 @@
+Group Member 1: Benjamin Borden - U53067162
+Group Member 2: Elyse Kaczmarek - U65134290
+
+Group Number: 6
+
+TL;DR: 37/45 of our classes were reused exactly, or with minimal changes from group member 1's original implementation.
+       The most significant changes we had to make were adding new classes that were specific to Quest of Legends gameplay -
+       such as new types of Tiles, a specific kind of board (LegendsBoard) with new movement capabilities, and a new descendant
+       of the Game class in order to start gameplay according to Quest of Legends rules (LegendsGame). The most significant
+       changes outside of that related to getting the heroes to move independently, while still controlled by one user (as 
+       opposed to the implementation in the Quest, which had all heroes move as one unit), in addition to allowing heros to
+       move, teleport, or go back to the Nexus rather than fight (in the Quest, heroes were not given the option to "run from"
+       a fight, while here they are).
+
+Entity.java: This class was kept exactly the same as it was in group member 1's original implementation. This is because the 
+             class was still useful, and could be strictly reused in Quest of Legends. Entity's are still simply things that 
+             require a name, and can be printed in some way.
+    LivingEntity.java: This class was kept exactly the same as it was in group member 1's original implementation. This is
+                       because the class was still useful, and could be strictly reused in Quest of Legends. Living entities
+                       are still things that have health, a level, and are able to engage in combat.
+        Monster.java: This class was kept almost exactly the same as it was in group member 1's original implementation. This
+                      is because the class was still useful, and could be almost strictly reused to represent an abstract
+                      Monster object in Quest of Legends. The only change we made was to include a 'lane' data member, which
+                      allowed other classes to access the lane that a particular monster belonged to. We added this as a 
+                      convenient way to access the monster lane when we needed it for valid movement checking, for example.
+            Exoskeleton.java: This class was kept exactly the same as it was in group member 1's original implementation. This 
+                              is because the class was still useful, and could be strictly reused in Quest of Legends. 
+                              Exoskeletons are still monsters that exist in this game.
+            Spirit.java: This class was kept exactly the same as it was in group member 1's original implementation. This is 
+                         because the class was still useful, and could be strictly reused in Quest of Legends. Spirits are  
+                         still monsters that exist in this game.
+            Dragon.java: This class was kept exactly the same as it was in group member 1's original implementation. This is
+                         because the class was still useful, and could be strictly reused in Quest of Legends. Dragons are 
+                         still monsters that exist in this game.
+        Hero.java: This class was kept almost exactly the same as it was in group member 1's original implementation. This is
+                   because the class was still useful, and could be almost strictly reused in Quest of Legends, as we still
+                   needed to be able to represent heroes who would be able to hold/consume items, equip weapons/armor, have
+                   certain statistics, etc. The only change we had to make was creating a new data member representing the 
+                   hero's ID. We added this so that we could easily recognize different heroes in a sequential order of
+                   action, and have them move/act independently. With this, we also added a new constructor which allowed us
+                   to set the heroID when creating the object.
+        add heroID for differentiating heroes (allowed us to recognize different heroes and move them independently),
+                    additional constructor allowing us to set the heroID when creating the object
+            Paladin.java: This class was kept exactly the same as it was in group member 1's original implementation. This is 
+                          because the class was still useful, and could be strictly reused in Quest of Legends. Paladins are
+                          still a type of hero that exists in this game, and they level up in the same way as in the Quest.
+            Sorcerer.java: This class was kept exactly the same as it was in group member 1's original implementation. This is
+                           because the class was still useful, and could be strictly reused in Quest of Legends. Sorcerers are
+                           still a type of hero that exists in this game, and they level up in the same way they do in the Quest.
+            Warrior.java: This class was kept exactly the same as it was in group member 1's original implementation. This is 
+                          because the class was still useful, and could be strictly reused in Quest of Legends. Warriors are
+                          still a type of hero that exists in this game, and they level up in the same way they do in the Quest.
+    Item.java: This class was kept exactly the same as it was in group member 1's original implementation. This is because the
+               class was still useful, and could be strictly reused in Quest of Legends. There still exist items that you can
+               buy and sell in this game.
+        Armor.java: This class was kept exactly the same as it was in group member 1's original implementation. This is because 
+                    the class was still useful, and could be strictly reused in Quest of Legends. There is still armor that 
+                    reduces damage done to the wearer in this game.
+        Spell.java: This class was kept exactly the same as it was in group member 1's original implementation. This is because 
+                    the class was still useful, and could be strictly reused in Quest of Legends. There are still spells which
+                    have types, do damage, and expend mana in this game.
+        Potion.java: This class was kept exactly the same as it was in group member 1's original implementation. This is because 
+                     the class was still useful, and could be strictly reused in Quest of Legends. There are still different 
+                     types of potions which have specific types of effects when consumed in this game.
+        Weaponry.java: This class was kept exactly the same as it was in group member 1's original implementation. This is
+                       because the class was still useful, and could be strictly reused in Quest of legends. There are still
+                       weapons which allow a hero to do a certain amount of extra damage when equipped in this game.
+
+Tile.java: This class was adjusted slightly from group member 1's original implementation. This is because we needed to account
+           for limiting the number of monsters and heroes who may be in one tile at the same time.
+    BlockingTile.java: This class was adjusted slightly from group member 1's original implementation. This is because we 
+                       wanted to change the color and style of how this type of tile was printed in the terminal.
+    Market.java: This class was functionally kept the same from group member 1's original implementation. The class was still
+                 useful, and could be reused in the Quest of Legends. There was still a marketplace in this game. We made very
+                 small changes to show a bit more information about the cost and required level of an item for sale in the shop.
+        Nexus.java: This is a completely NEW class. We added a specific Nexus class (as opposed to strictly reusing the Market
+                    class in its place) because we wanted the ability to spawn a hero or monster in that tile according to the
+                    Quest of Legends rules, adding a team data member which specified whether it was a Nexus belonging to the hero
+                    team or the monster team, as well as adding a check to see if a win had taken place (monster stepped on a 
+                    team hero Nexus tile, or vice versa).
+                    NOTE: We made the Nexus tile a subclass of Market and not a subclass of CommonTile since we recognized that 
+                          the Nexus is not 'common' - it belongs to one team or the other. In addition, aside from a couple minor
+                          differences, it was functionally equivalent to a market tile.
+    CommonTile.java: This class was functionally kept the same from group member 1's original implementation. The class was still
+                     useful, and could be reused in the Quest of Legends. We still needed common tiles in this game. The only
+                     change we made was to add a simple noarg constructor for completeness.
+        BoostTile.java: This is a completely NEW class. We decided to add this abstract class to our Quest of Legends implementation
+                        because we realized that the purpose of the CommonTiles was slightly different in this game. Each tile
+                        could either provide a boost, or provide no boost, and therefore it made the most sense to make each new
+                        type of tile needed in the Quest of Legends a subclass of this abstract class.
+            PlainTile.java: This is a completely NEW class. We decided to make Plain tiles their own separate class (as opposed
+                            to simply reusing the CommonTile class for this purpose) to maintain consistency, and allow us to
+                            call "steppedOn" and "steppedOff" when a hero entered or exited a tile, respectively. Both methods
+                            were necessary in the other boosts tiles in order to boost a specific skill. Therefore, plain tiles
+                            are simply boost tiles that boost 0 skills. In other words, it enabled us to make use of polymorphism.
+            BushTile.java: This is a completely NEW class. We decided to make this a separate class beacuse we had to include a
+                           new type of tile which boosted the dexterity skill, and had no preexisting classes that already did that.
+            CaveTile.java: This is a completely NEW class. We decided to make this a separate class because we had to include a
+                           new type of tile which boosted the agility skill, and had no preexisting classes that already did that.
+            KoulouTile.java: This is a completely NEW class. We decided to make this a separate class because we had to include a 
+                             new type of tile which boosted the strength skill, and had no preexisting classes that already did that.
+
+Board.java: This class was kept, for the most part, identical to the Board class from group member 1's original implementation.
+            This class was still useful and could be reused in Quest of Legends, as we still needed a board that living entities
+            could move around within in this game. The only things we had to adjust were changing certain methods from private
+            to protected (so they were still not publicly accessible, but the LegendsBoard class could use them), and significantly
+            adjusting our moveTo() method according to our new implementation of how heroes were stored within the Player class.
+    LegendsBoard.java: This is a completely NEW class. We decided to make this a seperate class because we had to include a new
+                       type of board that was specific to the Quest of Legends game. We were able to make this a subclass of
+                       the Board class because it still allowed heroes to move on it, monsters to spawn, consisted of a 2d
+                       array of Tiles, etc. However, we made it a separate subclass in order to implement teleporation, "back",
+                       separate hero movement, and other rules that were specific to the Quest of Legends concrete game.
+
+Fight.java: This class was kept almost exactly the same as it was in group member 1's original implementation. This class was 
+            still useful and could be reused in Quest of Legends, as we still needed heroes and monsters to be able to fight
+            one another. The only thing we changed was one line to fix a minor spelling/syntax error in a print statement.
+Game.java: This class was kept the same as it was in group member 1's original implementation, since we still needed a game class
+           which was turn-based, contained some set of available heroes, monsters, and items parsed from input .txt files, and
+           relied on the use of a board. The only changes we made were to make it a generic class, change certain private methods
+           to protected so it they could be accessed by the LegendsGame subclass, and add functionality for a hero to be able to
+           equip a weapon or armor on the first turn. We changed the class to generic (specifically for the board data member)
+           so that any instance of Game would have to specifify an extension of the board class. This maintained compatibility
+           with our created subclass of the board class (LegendsBoard), so we could have a LegendsBoard as the board data
+           member rather than restricting it to simply a data member of type Board. We also allowed a hero to use their action
+           to equip a weapon or armor on the first turn because we believed it improved gameplay and made it more fair.
+    LegendsGame.java: This is a completely NEW class. We decided to make this a separate class because the original startGame()
+                      function in Game.java didn't allow us to move heroes separately, or give the option to move/teleport/
+                      return to the nexus/etc. in the middle of a fight, so we needed to override that method and add some
+                      helper methods to support this new independent behavior.
+
+Input.java: This class was kept exactly the same as it was in group member 1's original implementation. This is because the class 
+            was still useful, and could be strictly reused in Quest of legends. We still needed the ability to conveniently parse
+            specific kinds of inputs from the user, in the same way.
+Player.java: This class was kept almost exactly the same as it was in group member 1's original implementation. This is because
+             the class was stil useful, and only needed minor adjustments to be reused in Quest of Legends. In order to add the
+             ability to move heroes independently, we needed to add a data member which kept track of which hero's turn it was
+             within the player's hero party. Additionally, since there was a specific win condition set in this game, we needed
+             a boolean data member which kept track of whether or not the player had won, which would signal the end of game.
+Main.java: This file was changed by 1 line from group member 1's original implementation, simply so that it would call the 
+            newly created LegendsGame class (so it plays Quest of Legends rather than simply the Quest).
+
+*.txt: All input files were kept the same. We chose to keep them the same because all the names, attributes, etc. were 
+       still applicable from Quest to be reused and parsed the same way in Quest of Legends.
