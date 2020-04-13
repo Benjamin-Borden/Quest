@@ -51,15 +51,15 @@ public class LegendsBoard extends Board{
 
     private <T extends BoostTile> T getRandomTile() {
         T ret;
-        float perc = Math.random();
+        double perc = Math.random();
         if(perc<PERCENT_BUSH){
-            ret = new BushTile();
+            ret = (T) new BushTile();
         }else if(perc<PERCENT_CAVE+PERCENT_BUSH){
-            ret = new CaveTile();
+            ret = (T) new CaveTile();
         }else if(perc<PERCENT_KOULOU+PERCENT_CAVE+PERCENT_BUSH) {
-            ret = new KoulouTile();
+            ret = (T) new KoulouTile();
         }else{
-            ret = new PlainTile();
+            ret = (T) new PlainTile();
         }
         return ret;
     }
