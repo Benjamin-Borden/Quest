@@ -50,16 +50,18 @@ public class LegendsBoard extends Board{
     }
 
     private <T extends BoostTile> T getRandomTile() {
-        int perc = Math.random();
+        T ret;
+        float perc = Math.random();
         if(perc<PERCENT_BUSH){
-            return new BushTile();
+            ret = new BushTile();
         }else if(perc<PERCENT_CAVE+PERCENT_BUSH){
-            return new CaveTile();
+            ret = new CaveTile();
         }else if(perc<PERCENT_KOULOU+PERCENT_CAVE+PERCENT_BUSH) {
-            return new KoulouTile();
+            ret = new KoulouTile();
         }else{
-            return new PlainTile();
+            ret = new PlainTile();
         }
+        return ret;
     }
 
     public void teleport(int heroID) {
