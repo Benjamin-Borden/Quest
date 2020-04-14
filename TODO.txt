@@ -1,26 +1,9 @@
 TODO:
-- *check for valid move before moving hero on board (restrict when beside monster &
-    don't let the heroes walk off the board)
-- printed hp after an attack -> add label for hero and monster to clarify who's hp is whose
 - end game when monsters reach hero nexus
-- regain 10% health and mana at the start of each round (turn?)
-- null pointer exception after killing monsters
-- monsters don't spawn on their nexus, they spawn on row 1
-- fix back bug (see below)
-- *Info counts as action bug
-
-POTENTIAL FIX:
-- move choosing the hero action to a separate method
-        + PROBLEM: nullpointerexception
-- would help fix checking for valid move before moving hero on board (can call validMove()
-    and force player to choose a different option if move is not valid)
-- would also help fix bug where hitting 'i' counts as a separate action
-
-BACK BUG:
-- the position index is incorrect, but when fixed, the initial spawn doe
-sn't work correctly
-
+- fix inital print board so it shows monsters spawning on nexus
+// elyse notes
 print between spawn monsters and monster actions
-2 - monsters receive dmg
 i display monster Info
 overworldfight.displayInfo()
+put -hp feature in readme
+put all heroes recieve gold and exp after fight in readme because it was ambiguous
