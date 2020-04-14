@@ -22,18 +22,24 @@ public class LegendsGame extends Game<LegendsBoard> {
         board.back(players[0].getHeroTurn());
         players[0].setHeroTurn(2);
         board.back(players[0].getHeroTurn());
-        System.out.println(board);
+        
         System.out.println("Welcome to Quest of Legends! In Quest of Legends you are trying to prevent the enemy monsters from reach your nexus!");
         System.out.println("You win by reaching the opposing nexus! You may fight the monster, drink potions, equip armor, or buy things from the nexus.");
         System.out.println("Use wasd to move around! the i key will open your inventory and e will let you drink a potion or equip a weapon or armor!");
         System.out.println("Red I's are unpassable, white P's are plain tiles, purple C's are caves which boost your agility, green B's are bushes which boost\nyour dexterity, and turquoise K's are koulous which boost your strength!");
         System.out.println("Your heroes are the gold H!");
+        System.out.println();
+        System.out.println("| o __   | o __   | o __ ");
+		System.out.println("+/|-)_)  +/|-)_)  +/|-)_)");
+		System.out.println(" / \\      / \\      / \\   ");
 
         int roundCounter = ROUNDS_BETWEEN_MONSTER_SPAWNS;
         boolean continuePlaying = true;
         do{
-            if(roundCounter++%ROUNDS_BETWEEN_MONSTER_SPAWNS==0)
+            if(roundCounter++%ROUNDS_BETWEEN_MONSTER_SPAWNS==0) {
+                System.out.println(board);
                 board.spawnMonsters();
+            }
             board.monsterActions();
             boolean monstWin = board.checkWinFor("monster");
 
