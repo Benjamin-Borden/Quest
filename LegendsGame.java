@@ -130,19 +130,19 @@ public class LegendsGame extends Game<LegendsBoard> {
 
 
     public static void printEnd(String winOrLoss) {
-        System.out.println("        ,     \    /      ,        ");
-        System.out.println("       / \    )\__/(     / \       ");
-        System.out.println("      /   \  (_\  /_)   /   \      ");
-        System.out.println(" ____/_____\__\@  @/___/_____\____ ");
-        System.out.println("|             |\../|              |");
-        System.out.println("|              \VV/               |");
+        System.out.println("        ,     \\    /      ,        ");
+        System.out.println("       / \\    )\\__/(     / \\       ");
+        System.out.println("      /   \\  (_\\  /_)   /   \\      ");
+        System.out.println(" ____/_____\\__\\@  @/___/_____\\____ ");
+        System.out.println("|             |\\../|              |");
+        System.out.println("|              \\VV/               |");
         if (winOrLoss.equals("win")) { System.out.println("|          Y O U  W O N !         |");}
         else {System.out.println("|          Y O U  L O S T         |");}
         System.out.println("");
         System.out.println("|_________________________________|");
-        System.out.println(" |    /\ /      \\       \ /\    | ");
-        System.out.println(" |  /   V        ))       V   \  | ");
-        System.out.println("|/     `       //        '     \| ");
+        System.out.println(" |    /\\ /      \\\\       \\ /\\    | ");
+        System.out.println(" |  /   V        ))       V   \\  | ");
+        System.out.println("|/     `       //        '     \\| ");
         System.out.println("`              V                '");
     }
 }
