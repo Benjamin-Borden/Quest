@@ -318,7 +318,7 @@ public class Fight {
     }
 
     public static void regenerateHeroes(Hero[] heroes) {
-        System.out.println("All heroes regenerated " + (100*PERCENT_REGEN) + " of their health and mana!");
+        System.out.println("All heroes regenerated " + (int)(100*PERCENT_REGEN) + "% of their health and mana!");
         for(Hero h: heroes){
             h.setCurrentHealth((int) (h.getCurrentHealth()*(1+PERCENT_REGEN)));
             h.setCurrentMana((int) (h.getCurrentMana()*(1+PERCENT_REGEN)));
