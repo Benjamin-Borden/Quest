@@ -20,6 +20,7 @@ public abstract class Monster extends LivingEntity{
     }
     public String toString(){
         return getName()+ ":"+
+                "\n\t Type = \t" + getClass().toString().split(" ")[1] +
                 "\n\t Level = \t" + getLevel() +
                 "\n\t Total Health =\t" + getTotalHealth() +
                 "\n\t Current Health =\t" + getCurrentHealth() +
