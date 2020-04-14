@@ -329,8 +329,8 @@ public class LegendsBoard extends Board{
             }
         }else if(e instanceof Hero){
             Hero hero = boardState[h][w].getHero();
-            System.out.println(hero.getName()+" has died!");
             if(hero.getCurrentHealth()<=0){
+                System.out.println(hero.getName()+" has died!");
                 hero.setCurrentHealth(hero.getTotalHealth());
                 hero.setCurrentMana(hero.getTotalMana());
                 back(hero.getHeroID());
