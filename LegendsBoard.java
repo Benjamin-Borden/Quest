@@ -60,7 +60,7 @@ public class LegendsBoard extends Board{
         return ret;
     }
 
-    public void teleport(int heroID) {
+    public boolean teleport(int heroID) {
         boolean accepted = false;
         int col;
         int row;
@@ -72,10 +72,10 @@ public class LegendsBoard extends Board{
             if (validTeleport(row, col, heroID)) { accepted=true;}
             else {System.out.println("Remember, you cannot teleport within your own lane, and you cannot teleport past the last monster in your target lane. Try again.");}
         } while (accepted == false);
-        moveTo(row, col, heroID);
+        return moveTo(row, col, heroID);
     }
 
-    public void back(int heroID) {
+    public boolean back(int heroID) {
         // moves hero back to the nexus
         // randomizes which nexus spot it is
         Random random = new Random();
@@ -84,7 +84,7 @@ public class LegendsBoard extends Board{
         int[] position = playerLocs[heroID];
 
         int nexusCell = ((getLane(position[0])-1)*(LANE_WIDTH+1)) + randomCell;
-        moveTo(HERO_NEXUS_ROW, nexusCell, heroID);
+        return moveTo(HERO_NEXUS_ROW, nexusCell, heroID);
     }
 
 
@@ -128,7 +128,7 @@ public class LegendsBoard extends Board{
     public void monsterActions(){
         for(int h = boardHeight-1; h> -1;h--) {
             for (int w = boardWidth-1; w > -1; w--) {
-                System.out.println(boardState[h][w].hasMonster()+" H:"+h+" W:"+w);
+                //System.out.println(boardState[h][w].hasMonster()+" H:"+h+" W:"+w);
 
                 if (boardState[h][w].hasMonster()) {
                     Monster m = boardState[h][w].getMonst();
@@ -328,8 +328,8 @@ public class LegendsBoard extends Board{
             }
         }else if(e instanceof Hero){
             Hero hero = boardState[h][w].getHero();
-            System.out.println(hero.getName()+" has died!");
             if(hero.getCurrentHealth()<=0){
+                System.out.println(hero.getName()+" has died!");
                 hero.setCurrentHealth(hero.getTotalHealth());
                 hero.setCurrentMana(hero.getTotalMana());
                 back(hero.getHeroID());

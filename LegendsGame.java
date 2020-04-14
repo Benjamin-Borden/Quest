@@ -37,7 +37,7 @@ public class LegendsGame extends Game<LegendsBoard> {
             for(int i=0; i<players[0].getParty().length; i++) {
                 players[0].setHeroTurn(i);
                 System.out.println(board);
-
+                boolean validAction = false;
                 System.out.println("What would " + players[0].getParty()[i].getName() + " like to do?");
                 System.out.println("(WASD for movement, E for interacting with inventory, I for hero information, T to teleport to a different lane, or B to return back to the nexus.)");
                 boolean monsterCloseBy = board.monsterCloseBy(i);
@@ -51,33 +51,41 @@ public class LegendsGame extends Game<LegendsBoard> {
 
                 if(Character.toUpperCase(input)=='Q'){
                     continuePlaying = false;
+                    validAction = true;
                     break;
                 }else if(Character.toUpperCase(input)=='I'){
                     players[0].displayParty();
+                    validAction = false;
                 }else if(Character.toUpperCase(input)=='W'){
-                    board.move(-1,0,i);
+                    validAction = board.move(-1,0,i);
                 }else if(Character.toUpperCase(input)=='A'){
-                    board.move(0,-1,i);
+                    validAction = board.move(0,-1,i);
                 }else if(Character.toUpperCase(input)=='S'){
-                    board.move(1,0,i);
+                    validAction = board.move(1,0,i);
                 }else if(Character.toUpperCase(input)=='D'){
-                    board.move(0,1,i);
+                    validAction = board.move(0,1,i);
                 }else if(Character.toUpperCase(input)=='E'){
-                    equipOrDrink(i);
+                    validAction = equipOrDrink(i);
                 }else if(Character.toUpperCase(input)=='T') {
-                    board.teleport(i);
+                    validAction = board.teleport(i);
                 }else if(Character.toUpperCase(input)=='B') {
-                    board.back(i);
+                    validAction = board.back(i);
                 }else if(Character.toUpperCase(input)=='1') {
                     board.attack(i);
+                    validAction = true;
                 }else if(Character.toUpperCase(input)=='2') {
                     board.spellAttack(i);
+                    validAction = true;
                 }
                 if(players[0].isWinner()){
                     System.out.println(board);
                     System.out.println("CONGRATULATIONS! YOU HAVE WON QUEST OF LEGENDS");
                     continuePlaying= false;
                     break;
+                }else{
+                    if(!validAction){
+                        i--;
+                    }
                 }
             }
 
@@ -86,13 +94,13 @@ public class LegendsGame extends Game<LegendsBoard> {
 
 
     // overload method
-    public void equipOrDrink(int hero){
+    public boolean equipOrDrink(int hero){
         System.out.println("Do you want to equip something or drink a potion? (e/d)");
         char input2 = Input.getChar(new char[]{'d','D','e','E'});
         if(Character.toUpperCase(input2)=='D'){
-            drinkPotion((players[0].getParty()[hero]));
+            return drinkPotion((players[0].getParty()[hero]));
         }else{
-            equipWeaponOrArmor((players[0].getParty()[hero]));
+            return equipWeaponOrArmor((players[0].getParty()[hero]));
         }
     }
 }

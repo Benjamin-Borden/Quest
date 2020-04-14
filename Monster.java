@@ -81,7 +81,7 @@ public abstract class Monster extends LivingEntity{
         }
         System.out.println(getCurrentHealth());
         setCurrentHealth(getCurrentHealth()-damage);
-        System.out.println(getCurrentHealth());
+        System.out.println(getName()+" is at "+getCurrentHealth()+"HP!");
     }
 
 }

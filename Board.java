@@ -127,11 +127,11 @@ public class Board {
 
     }
     //moves a hero based on an offset of current value
-    public void move(int offseth, int offsetw,int player){
-        moveTo(playerLocs[player][0]+offseth,playerLocs[player][1]+offsetw,player);
+    public boolean move(int offseth, int offsetw,int player){
+        return moveTo(playerLocs[player][0]+offseth,playerLocs[player][1]+offsetw,player);
     }
     protected boolean moveTo(int h,int w,int player){
-        if(h<0 || w<0 || h>boardHeight-1 || w> boardWidth-1 || !boardState[h][w].passable()){
+        if(h<0 || w<0 || h>boardHeight-1 || w> boardWidth-1 || !boardState[h][w].passable() || boardState[h][w].hasHero()){
             System.out.println("You can not move here.");
             return false;
         }
