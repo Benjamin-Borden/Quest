@@ -17,4 +17,10 @@ POTENTIAL FIX:
 - would also help fix bug where hitting 'i' counts as a separate action
 
 BACK BUG:
-- the position index is incorrect, but when fixed, the initial spawn doesn't work correctly
+- the position index is incorrect, but when fixed, the initial spawn doe
+sn't work correctly
+
+print between spawn monsters and monster actions
+2 - monsters receive dmg
+i display monster Info
+overworldfight.displayInfo()

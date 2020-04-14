@@ -3,7 +3,8 @@ Group Member 2: Elyse Kaczmarek - U65134290
 
 Group Number: 6
 
-TL;DR: 37/45 of our classes were reused exactly, or with minimal changes from group member 1's original implementation.
+TL;DR: 37/45 of our classes were reused exactly, or with minimal changes from group member 1's original implementation. We chose
+       to extend primarily from group member 1's implementation
        The most significant changes we had to make were adding new classes that were specific to Quest of Legends gameplay -
        such as new types of Tiles, a specific kind of board (LegendsBoard) with new movement capabilities, and a new descendant
        of the Game class in order to start gameplay according to Quest of Legends rules (LegendsGame). The most significant
