@@ -138,11 +138,10 @@ public class LegendsGame extends Game<LegendsBoard> {
         System.out.println("|              \\VV/               |");
         if (winOrLoss.equals("win")) { System.out.println("|          Y O U  W O N !         |");}
         else {System.out.println("|          Y O U  L O S T         |");}
-        System.out.println("");
         System.out.println("|_________________________________|");
         System.out.println(" |    /\\ /      \\\\       \\ /\\    | ");
         System.out.println(" |  /   V        ))       V   \\  | ");
-        System.out.println("|/     `       //        '     \\| ");
-        System.out.println("`              V                '");
+        System.out.println(" |/     `       //        '     \\| ");
+        System.out.println(" `              V                '");
     }
 }
