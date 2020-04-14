@@ -3,12 +3,6 @@ TODO:
 - regain 10% health and mana at the start of each round (turn?) 
 - null pointer exception after killing monsters 
 - monsters don't spawn on their nexus, they spawn on row 1
-- fix back bug (see below)
-
-
-BACK BUG:
-- the position index is incorrect, but when fixed, the initial spawn doe
-sn't work correctly
 
 print between spawn monsters and monster actions
 2 - monsters receive dmg
