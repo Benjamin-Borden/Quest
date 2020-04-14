@@ -13,7 +13,6 @@ public class Nexus extends Market {
             System.out.println("Team must be either hero or monster.");
         }
         this.team = team;
-        System.out.println(this.team+team);
     }
 
     public boolean monsterWin() {
@@ -23,6 +22,15 @@ public class Nexus extends Market {
         }
         return ret;
     }
+
+    public String getTeam() {
+        return team;
+    }
+
+    public void setTeam(String team) {
+        this.team = team;
+    }
+
     public void steppedOn(Player p){
         setHero(p.getParty()[p.getHeroTurn()]);
         if(heroWin()){

@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -8,6 +9,7 @@ public class LegendsBoard extends Board{
     private int HERO_NEXUS_ROW;
     private int MONSTER_NEXUS_ROW = 0;
     private int[][] monsterLocs = {{-1,-1},{-1,-1},{-1,-1}};
+    Fight overworldFight = new Fight();
 
     public LegendsBoard(Game g) {
         boardState = new Tile[8][8];
@@ -16,7 +18,8 @@ public class LegendsBoard extends Board{
         HERO_NEXUS_ROW = boardHeight-1;
         game = g;
         generateBoardState();
-        playerLocs = new int[][]{{0,0},{3,0},{6,0}};
+        playerLocs = new int[][]{{0*(LANE_WIDTH+1),0},{1*(LANE_WIDTH+1),0},{2*(LANE_WIDTH+1),0}};
+
     }
     private void generateBoardState(){
         Object[] temp = Input.flatten(new Item[][]{game.getPotions(),game.getArmor(),game.getWeapons(),game.getSpells()}).toArray();
@@ -81,9 +84,10 @@ public class LegendsBoard extends Board{
         int[] position = playerLocs[heroID];
 
         int nexusCell = ((getLane(position[0])-1)*(LANE_WIDTH+1)) + randomCell;
-        System.out.println(""+HERO_NEXUS_ROW+nexusCell+heroID);
         moveTo(HERO_NEXUS_ROW, nexusCell, heroID);
     }
+
+
 
     public boolean validTeleport(int row, int col, int heroID) {
         boolean ret = true;
@@ -122,37 +126,44 @@ public class LegendsBoard extends Board{
         this.monsterLocs = monsterLocs;
     }
     public void monsterActions(){
-        for(int i =0;i< monsterLocs.length;i++){
-            Monster m = boardState[monsterLocs[i][0]][monsterLocs[i][1]].getMonst();
-            int heroH=-1, heroW =-1;
-            if(boardState[monsterLocs[i][0]][monsterLocs[i][1]].hasHero()){
-                heroH = monsterLocs[i][0];
-                heroW = monsterLocs[i][1];
-            }else if(monsterLocs[i][1]+1 != (NUM_LANES*LANE_WIDTH+(NUM_LANES-1)) && boardState[monsterLocs[i][0]][monsterLocs[i][1]+1].hasHero()){
-                heroH = monsterLocs[i][0];
-                heroW = monsterLocs[i][1]+1;
-            }else if(monsterLocs[i][1] != 0 && boardState[monsterLocs[i][0]][monsterLocs[i][1]-1].hasHero()){
-                heroH = monsterLocs[i][0];
-                heroW = monsterLocs[i][1]-1;
-            }else if(monsterLocs[i][0]+1 != (NUM_LANES*LANE_WIDTH+(NUM_LANES-1)) && boardState[monsterLocs[i][0]+1][monsterLocs[i][1]].hasHero()){
-                heroH = monsterLocs[i][0]+1;
-                heroW = monsterLocs[i][1];
-            }
-            if(heroH != -1){
-                int oldHealth, newHealth;
-                oldHealth = boardState[heroH][heroW].getHero().getCurrentHealth();
-                boardState[heroH][heroW].getHero().receiveDamage(boardState[monsterLocs[i][0]][monsterLocs[i][1]].getMonst().regularDamage());
-                newHealth = boardState[heroH][heroW].getHero().getCurrentHealth();
-                System.out.println(boardState[monsterLocs[i][0]][monsterLocs[i][1]].getMonst().getName()+" attacked "+boardState[heroH][heroW].getHero().getName()+" for "+(-1*(newHealth-oldHealth))+" points of damage!\n"+boardState[heroH][heroW].getHero().getName()+" is at "+ boardState[heroH][heroW].getHero().getCurrentHealth()+" HP!");
-            }else if(!boardState[monsterLocs[i][0]+1][monsterLocs[i][1]].occupied(m)){
-                boardState[monsterLocs[i][0]+1][monsterLocs[i][1]].setMonst(boardState[monsterLocs[i][0]][monsterLocs[i][1]].getMonst());
-                boardState[monsterLocs[i][0]][monsterLocs[i][1]].setMonst(null);
-                monsterLocs[i][0]=monsterLocs[i][0]+1;
-                if(boardState[monsterLocs[i][0]][monsterLocs[i][1]] instanceof Nexus){
-                    System.out.println("THE MONSTERS HAVE WON, GAME OVER.");
+        for(int h = boardHeight-1; h> -1;h--) {
+            for (int w = boardWidth-1; w > -1; w--) {
+                System.out.println(boardState[h][w].hasMonster()+" H:"+h+" W:"+w);
+
+                if (boardState[h][w].hasMonster()) {
+                    Monster m = boardState[h][w].getMonst();
+                    int heroH = -1, heroW = -1;
+                    if (boardState[h][w].hasHero()) {
+                        heroH = h;
+                        heroW = w;
+                    } else if (w + 1 != (NUM_LANES * LANE_WIDTH + (NUM_LANES - 1)) && boardState[h][w + 1].hasHero()) {
+                        heroH = h;
+                        heroW = w + 1;
+                    } else if (w != 0 && boardState[h][w - 1].hasHero()) {
+                        heroH = h;
+                        heroW = w-1;
+                    } else if (h + 1 != (NUM_LANES * LANE_WIDTH + (NUM_LANES - 1)) && boardState[h + 1][w].hasHero()) {
+                        heroH = h + 1;
+                        heroW = w;
+                    }
+                    if (heroH != -1) {
+                        int oldHealth, newHealth;
+                        oldHealth = boardState[heroH][heroW].getHero().getCurrentHealth();
+                        boardState[heroH][heroW].getHero().receiveDamage(boardState[h][w].getMonst().regularDamage());
+                        newHealth = boardState[heroH][heroW].getHero().getCurrentHealth();
+                        System.out.println(boardState[h][w].getMonst().getName() + " attacked " + boardState[heroH][heroW].getHero().getName() + " for " + (-1 * (newHealth - oldHealth)) + " points of damage!\n" + boardState[heroH][heroW].getHero().getName() + " is at " + boardState[heroH][heroW].getHero().getCurrentHealth() + " HP!");
+                        checkDeath(boardState[heroH][heroW].getHero(),heroH,heroW);
+                    } else if (!boardState[h + 1][w].occupied(m)) {
+                        boardState[h + 1][w].setMonst(boardState[h][w].getMonst());
+                        boardState[h][w].setMonst(null);
+                        if (boardState[h][w] instanceof Nexus && ((Nexus)boardState[h][w]).getTeam().equals("hero")) {
+                            System.out.println("THE MONSTERS HAVE WON, GAME OVER.");
+                        }
+                    }
                 }
             }
         }
+
     }
     public int monsterLoc(int lane) {
         // given lane, returns row of last monster (closest to hero nexus)
@@ -272,9 +283,73 @@ public class LegendsBoard extends Board{
         int counter = 0;
         for(Monster m: mons){
             m.setLane(counter);
-            monsterLocs[counter]=new int[]{MONSTER_NEXUS_ROW,random.nextInt(2)+(counter*(LANE_WIDTH+1))};
-            boardState[monsterLocs[counter][0]][monsterLocs[counter][1]].setMonst(m);
+            //monsterLocs[counter]=new int[]{MONSTER_NEXUS_ROW,random.nextInt(2)+(counter*(LANE_WIDTH+1))};
+            boardState[MONSTER_NEXUS_ROW][random.nextInt(2)+(counter*(LANE_WIDTH+1))].setMonst(m);
             counter++;
         }
+    }
+
+    public boolean monsterCloseBy(int i) {
+        int h = playerLocs[i][0], w = playerLocs[i][1];
+        return pickTarget(i)[0] != -1;
+    }
+
+    public void attack(int i) {
+        int[] hw = pickTarget(i);
+        overworldFight.regularAttack(boardState[playerLocs[i][0]][playerLocs[i][1]].getHero(),boardState[hw[0]][hw[1]].getMonst());
+        checkDeath(boardState[hw[0]][hw[1]].getMonst(),hw[0],hw[1]);
+
+    }
+
+    public void spellAttack(int i) {
+        int[] hw = pickTarget(i);
+        overworldFight.castSpell(boardState[playerLocs[i][0]][playerLocs[i][1]].getHero(),boardState[hw[0]][hw[1]].getMonst());
+        checkDeath(boardState[hw[0]][hw[1]].getMonst(),hw[0],hw[1]);
+
+    }
+    private boolean checkDeath(LivingEntity e, int h, int w){
+        boolean rtrn = false;
+        if(e instanceof Monster){
+            if(boardState[h][w].getMonst().getCurrentHealth()<=0){
+                System.out.println(boardState[h][w].getMonst().getName()+" has died!");
+                boardState[h][w].setMonst(null);
+                for(int[] i: playerLocs){
+                    Hero hero = boardState[i[0]][i[1]].getHero();
+                    System.out.println(hero.getName()+" received "+overworldFight.GOLD_BONUS+" Gold and "+overworldFight.EXP_BONUS+" exp!");
+                    hero.setMoney(hero.getMoney()+overworldFight.GOLD_BONUS);
+                    hero.setCurrentExperience(hero.getCurrentExperience()+overworldFight.EXP_BONUS);
+                    if(hero.isReadyToLevelUp()){
+                        hero.LevelUp();
+                        System.out.println(hero.getName()+" leveled up!");
+                    }
+
+                }
+                rtrn = true;
+            }
+        }else if(e instanceof Hero){
+            Hero hero = boardState[h][w].getHero();
+            System.out.println(hero.getName()+" has died!");
+            if(hero.getCurrentHealth()<=0){
+                hero.setCurrentHealth(hero.getTotalHealth());
+                hero.setCurrentMana(hero.getTotalMana());
+                back(hero.getHeroID());
+                rtrn = true;
+            }
+        }
+        return rtrn;
+    }
+    private int[] pickTarget(int i){
+        int[] rtrn = {-1,-1};
+        int h = playerLocs[i][0], w = playerLocs[i][1];
+        if(boardState[h][w].hasMonster()){
+            rtrn = new int[]{h,w};
+        }else if((h-1 != -1 && boardState[h-1][w].hasMonster())){
+            rtrn = new int[]{h-1,w};
+        }else if((w-1 != -1 && boardState[h][w-1].hasMonster())){
+            rtrn = new int[]{h,w-1};
+        }else if((w+1 != boardWidth && boardState[h][w+1].hasMonster())){
+            rtrn = new int[]{h,w+1};
+        }
+        return rtrn;
     }
 }

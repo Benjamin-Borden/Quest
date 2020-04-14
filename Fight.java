@@ -6,12 +6,16 @@ public class Fight {
     private Monster[] monsters;
 
     //exp and gold bonus from combat
-    private static final int GOLD_BONUS = 150;
-    private static final int EXP_BONUS = 2;
+    public static final int GOLD_BONUS = 150;
+    public static final int EXP_BONUS = 2;
     public Fight(Player p, Monster[] monsterEncounter) {
         setPlayer(p);
         setHeros(p.getParty());
         setMonsters(monsterEncounter);
+    }
+
+    public Fight() {
+
     }
 
     //getters and setters

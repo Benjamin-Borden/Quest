@@ -12,6 +12,7 @@ public class LegendsGame extends Game<LegendsBoard> {
     protected void startGame() {
         players = createPlayer();
         setPlayers(players);
+
         LegendsBoard board = new LegendsBoard(this);
         System.out.println("Use wasd to move around! the i key will open your inventory and e will let you drink a potion or equip a weapon or armor!");
         System.out.println("Red I's are unpassable, Green triangles are common tiles where you might meet monsters, and blue M's are markets where you can buy things");
@@ -23,6 +24,7 @@ public class LegendsGame extends Game<LegendsBoard> {
         board.back(players[0].getHeroTurn());
         players[0].setHeroTurn(2);
         board.back(players[0].getHeroTurn());
+        System.out.println(board);
 
         int roundCounter = ROUNDS_BETWEEN_MONSTER_SPAWNS;
         boolean continuePlaying = true;
@@ -30,8 +32,6 @@ public class LegendsGame extends Game<LegendsBoard> {
             if(roundCounter++%ROUNDS_BETWEEN_MONSTER_SPAWNS==0)
                 board.spawnMonsters();
             board.monsterActions();
-            System.out.println(board);
-
 
             // iterate through each hero in party for actions
             for(int i=0; i<players[0].getParty().length; i++) {
@@ -40,8 +40,14 @@ public class LegendsGame extends Game<LegendsBoard> {
 
                 System.out.println("What would " + players[0].getParty()[i].getName() + " like to do?");
                 System.out.println("(WASD for movement, E for interacting with inventory, I for hero information, T to teleport to a different lane, or B to return back to the nexus.)");
-                
-                char input = Input.getChar(new char[]{'W','w','A','a','S','s','D','d','I','i','Q','q','e','E', 't', 'T', 'b', 'B'});
+                boolean monsterCloseBy = board.monsterCloseBy(i);
+                char input;
+                if(monsterCloseBy){
+                    System.out.println("There's a monster close to you! You can attack it!\nYou can enter 1 for a regular attack, or 2 to cast a spell!");
+                    input = Input.getChar(new char[]{'W','w','A','a','S','s','D','d','I','i','Q','q','e','E', 't', 'T', 'b', 'B','1','2'});
+                }else{
+                    input = Input.getChar(new char[]{'W','w','A','a','S','s','D','d','I','i','Q','q','e','E', 't', 'T', 'b', 'B'});
+                }
 
                 if(Character.toUpperCase(input)=='Q'){
                     continuePlaying = false;
@@ -62,6 +68,10 @@ public class LegendsGame extends Game<LegendsBoard> {
                     board.teleport(i);
                 }else if(Character.toUpperCase(input)=='B') {
                     board.back(i);
+                }else if(Character.toUpperCase(input)=='1') {
+                    board.attack(i);
+                }else if(Character.toUpperCase(input)=='2') {
+                    board.spellAttack(i);
                 }
                 if(players[0].isWinner()){
                     System.out.println(board);

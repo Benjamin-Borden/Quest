@@ -135,12 +135,16 @@ public class Board {
             System.out.println("You can not move here.");
             return false;
         }
+        Player temp = new Player(new Hero[]{boardState[playerLocs[player][0]][playerLocs[player][1]].getHero()});
+        int t = game.getPlayers()[0].getHeroTurn();
+        game.getPlayers()[0].setHeroTurn(player);
         boardState[playerLocs[player][0]][playerLocs[player][1]].steppedOff(game.getPlayers()[0]);
+        game.getPlayers()[0].setHeroTurn(t);
         playerLocs[player][0]=h;
         playerLocs[player][1]=w;
         //System.out.println(this);
         boardState[h][w].steppedOn(game.getPlayers()[0]);
-        System.out.println(playerLocs);
+        //System.out.println(playerLocs);
         return true;
     }
     //check if a string a number

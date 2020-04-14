@@ -49,7 +49,6 @@ public class Game<T extends Board> {
             }else if(Character.toUpperCase(input)=='E'){
                 equipOrDrink();
             }
-            //System.out.println(board);
         }while(continuePlaying);
     }
 
