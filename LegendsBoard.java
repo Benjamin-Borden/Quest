@@ -83,7 +83,7 @@ public class LegendsBoard extends Board{
         int randomCell = random.nextInt(LANE_WIDTH);
         int[] position = playerLocs[heroID];
 
-        int nexusCell = ((getLane(position[0])-1)*(LANE_WIDTH+1)) + randomCell;
+        int nexusCell = ((getLane(position[1])-1)*(LANE_WIDTH+1)) + randomCell;
         moveTo(HERO_NEXUS_ROW, nexusCell, heroID);
     }
 
@@ -109,6 +109,8 @@ public class LegendsBoard extends Board{
         if (!moveToTile.passable()) {ret = false;}
         // can't go past monster in lane
         else if (row<monsterLoc(getLane(col))) {ret = false;}
+        // can't go in a tile already occupied by a hero
+        else if (moveToTile.hasHero()) {ret = false;}
         return ret;
 
     }
