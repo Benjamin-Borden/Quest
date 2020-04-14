@@ -128,6 +128,12 @@ public class Board {
     }
     //moves a hero based on an offset of current value
     public boolean move(int offseth, int offsetw,int player){
+        if(offseth<0){
+            if(boardState[playerLocs[player][0]][playerLocs[player][1]].hasMonster() || (playerLocs[player][1]-1 >-1 && boardState[playerLocs[player][0]][playerLocs[player][1]-1].hasMonster()) || (playerLocs[player][1]+1 != boardWidth && boardState[playerLocs[player][0]][playerLocs[player][1]+1].hasMonster()) ){
+                System.out.println("You must fight the monster!");
+                return false;
+            }
+        }
         return moveTo(playerLocs[player][0]+offseth,playerLocs[player][1]+offsetw,player);
     }
     protected boolean moveTo(int h,int w,int player){
@@ -135,6 +141,7 @@ public class Board {
             System.out.println("You can not move here.");
             return false;
         }
+
         Player temp = new Player(new Hero[]{boardState[playerLocs[player][0]][playerLocs[player][1]].getHero()});
         int t = game.getPlayers()[0].getHeroTurn();
         game.getPlayers()[0].setHeroTurn(player);

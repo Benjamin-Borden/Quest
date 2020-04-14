@@ -37,7 +37,7 @@ public class Nexus extends Market {
 
             p.setWinner(true);
         }else {
-            System.out.println("Would "+p.getParty()[p.getHeroTurn()].getName()+" like to open the market?");
+            System.out.println("Would "+p.getParty()[p.getHeroTurn()].getName()+" like to open the market?(y/n)");
             if(Character.toUpperCase(Input.getChar(new char[]{'Y','y','N','n'})) =='Y'){
                 Player temp = new Player(new Hero[]{p.getParty()[p.getHeroTurn()]});
                 super.steppedOn(temp);
