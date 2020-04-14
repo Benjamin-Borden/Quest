@@ -39,19 +39,11 @@ public class LegendsGame extends Game<LegendsBoard> {
                 players[0].setHeroTurn(i);
                 System.out.println(board);
 
-                System.out.println("What would " + players[0].getParty()[i].getName() + " like to do?");
-                System.out.println("(WASD for movement, E for interacting with inventory, I for hero information, T to teleport to a different lane, or B to return back to the nexus.)");
-                boolean monsterCloseBy = board.monsterCloseBy(i);
-                char input;
-                if(monsterCloseBy){
-                    System.out.println("There's a monster close to you! You can attack it!\nYou can enter 1 for a regular attack, or 2 to cast a spell!");
-                    input = Input.getChar(new char[]{'W','w','A','a','S','s','D','d','I','i','Q','q','e','E', 't', 'T', 'b', 'B','1','2'});
-                }else{
-                    input = Input.getChar(new char[]{'W','w','A','a','S','s','D','d','I','i','Q','q','e','E', 't', 'T', 'b', 'B'});
-                }
-
+                char input = getHeroAction();
+                // don't consume an action when player asks for input
                 while(Character.toUpperCase(input)=='I'){
                     players[0].displayParty();
+                    input = getHeroAction();
                 }
                 if(Character.toUpperCase(input)=='Q'){
                     continuePlaying = false;
@@ -86,6 +78,19 @@ public class LegendsGame extends Game<LegendsBoard> {
         }while(continuePlaying);
     }
 
+    private char getHeroAction() {
+        System.out.println("What would " + players[0].getParty()[i].getName() + " like to do?");
+        System.out.println("(WASD for movement, E for interacting with inventory, I for hero information, T to teleport to a different lane, or B to return back to the nexus.)");
+        boolean monsterCloseBy = board.monsterCloseBy(i);
+        char input;
+        if(monsterCloseBy){
+            System.out.println("There's a monster close to you! You can attack it!\nYou can enter 1 for a regular attack, or 2 to cast a spell!");
+            input = Input.getChar(new char[]{'W','w','A','a','S','s','D','d','I','i','Q','q','e','E', 't', 'T', 'b', 'B','1','2'});
+        }else{
+            input = Input.getChar(new char[]{'W','w','A','a','S','s','D','d','I','i','Q','q','e','E', 't', 'T', 'b', 'B'});
+        }
+        return input;
+    }
 
     // overload method
     public void equipOrDrink(int hero){
