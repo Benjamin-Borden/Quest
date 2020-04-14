@@ -14,6 +14,7 @@ public class LegendsGame extends Game<LegendsBoard> {
         setPlayers(players);
 
         LegendsBoard board = new LegendsBoard(this);
+        System.out.println(board);
         System.out.println("Use wasd to move around! the i key will open your inventory and e will let you drink a potion or equip a weapon or armor!");
         System.out.println("Red I's are unpassable, Green triangles are common tiles where you might meet monsters, and blue M's are markets where you can buy things");
         System.out.println("Your heroes are the gold H!");
