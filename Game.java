@@ -69,23 +69,23 @@ public class Game<T extends Board> {
                 i++;
             }
 
-            System.out.println("What hero do you want, enter the hero's number or 0 if you want no more heroes.");
+            System.out.println("What hero do you want? You must choose a total of 3.");
             int inp = Input.getInt(0,heroes.length);
-            if(inp==0){
-                if(temp.size()==0){
-                    System.out.println("You must have at least one hero!");
-                }else{
-                    done = true;
-                }
-            }else{
-                if(heroes[inp-1]==null){
-                    System.out.println("Hero already chosen, chose a different hero.");
-                }else {
-                    temp.add(heroes[inp - 1]);
-                    heroes[inp-1].setHeroID(counter);
-                    counter++;
-                    heroes[inp - 1] = null;
-                }
+            // if(inp==0){
+            //     if(temp.size()==0){
+            //         System.out.println("You must have at least one hero!");
+            //     }else{
+            //         done = true;
+            //     }
+            //} else
+            
+            if(heroes[inp-1]==null){
+                System.out.println("Hero already chosen, chose a different hero.");
+            }else {
+                temp.add(heroes[inp - 1]);
+                heroes[inp-1].setHeroID(counter);
+                counter++;
+                heroes[inp - 1] = null;
             }
             if(counter ==3){
                 done = true;
