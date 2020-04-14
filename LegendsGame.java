@@ -1,4 +1,5 @@
 import java.io.FileNotFoundException;
+import java.util.concurrent.TimeUnit;
 
 public class LegendsGame extends Game<LegendsBoard> {
     static final int ROUNDS_BETWEEN_MONSTER_SPAWNS = 8;
@@ -37,6 +38,7 @@ public class LegendsGame extends Game<LegendsBoard> {
             // iterate through each hero in party for actions
             for(int i=0; i<players[0].getParty().length; i++) {
                 players[0].setHeroTurn(i);
+                TimeUnit.SECONDS.sleep(3);
                 System.out.println(board);
                 boolean validAction = false;
                 System.out.println("What would " + players[0].getParty()[i].getName() + " like to do?");

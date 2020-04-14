@@ -1,10 +1,9 @@
 TODO:
 - end game when monsters reach hero nexus
-- regain 10% health and mana at the start of each round (turn?) 
-- null pointer exception after killing monsters 
 - fix inital print board so it shows monsters spawning on nexus
 // elyse notes
 print between spawn monsters and monster actions
-2 - monsters receive dmg
 i display monster Info
 overworldfight.displayInfo()
+put -hp feature in readme
+put all heroes recieve gold and exp after fight in readme because it was ambiguous
