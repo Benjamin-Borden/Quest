@@ -283,6 +283,8 @@ public class LegendsBoard extends Board{
         }
         int counter = 0;
         for(Monster m: mons){
+            System.out.println("Monster " + m.getName() + " has entered the fight!");
+            System.out.println(m);
             m.setLane(counter);
             //monsterLocs[counter]=new int[]{MONSTER_NEXUS_ROW,random.nextInt(2)+(counter*(LANE_WIDTH+1))};
             boardState[MONSTER_NEXUS_ROW][random.nextInt(2)+(counter*(LANE_WIDTH+1))].setMonst(m);
