@@ -22,7 +22,7 @@ public class LegendsGame extends Game<LegendsBoard> {
         players[0].setHeroTurn(2);
         board.back(players[0].getHeroTurn());
         System.out.println(board);
-        
+
         System.out.println("Use wasd to move around! the i key will open your inventory and e will let you drink a potion or equip a weapon or armor!");
         System.out.println("Red I's are unpassable, Green triangles are common tiles where you might meet monsters, and blue M's are markets where you can buy things");
         System.out.println("Your heroes are the gold H!");
@@ -50,11 +50,12 @@ public class LegendsGame extends Game<LegendsBoard> {
                     input = Input.getChar(new char[]{'W','w','A','a','S','s','D','d','I','i','Q','q','e','E', 't', 'T', 'b', 'B'});
                 }
 
+                while(Character.toUpperCase(input)=='I'){
+                    players[0].displayParty();
+                }
                 if(Character.toUpperCase(input)=='Q'){
                     continuePlaying = false;
                     break;
-                }else if(Character.toUpperCase(input)=='I'){
-                    players[0].displayParty();
                 }else if(Character.toUpperCase(input)=='W'){
                     board.move(-1,0,i);
                 }else if(Character.toUpperCase(input)=='A'){

@@ -4,12 +4,11 @@ TODO:
     + "__ has died" when the character is not dead
     + location prints? "false H:3 W:7" for example
     + label printed hp after an attack
-- print board after choosing heroes
-- add spawn of monsters after 8 turns
-- check if tile is already full before teleporting
+- end game when monsters reach hero nexus
 - regain 10% health and mana at the start of each round (turn?)
 - null pointer exception after killing monsters
-- ensure when a hero dies they respawn on nexus
+- ensure when a hero dies they respawn on nexus 
 - monsters don't spawn on their nexus, they spawn on row 1?
 - fix back bug where lanes 2 and 3 don't go where they're supposed to
 - don't let them walk off the edge of the board (esp in lanes 1 and 3)
+- Info counts as action bug
