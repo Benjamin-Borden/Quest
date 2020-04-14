@@ -1,14 +1,19 @@
 TODO:
 - check for valid move before moving hero on board (restrict when beside monster)
 - fix when print statements are called 
-    + "__ has died" when the character is not dead
     + location prints? "false H:3 W:7" for example
     + label printed hp after an attack
 - end game when monsters reach hero nexus
 - regain 10% health and mana at the start of each round (turn?)
 - null pointer exception after killing monsters
-- ensure when a hero dies they respawn on nexus 
 - monsters don't spawn on their nexus, they spawn on row 1?
 - fix back bug where lanes 2 and 3 don't go where they're supposed to
 - don't let them walk off the edge of the board (esp in lanes 1 and 3)
 - Info counts as action bug
+
+POTENTIAL FIX:
+- move choosing the hero action to a separate method
+        + PROBLEM: nullpointerexception
+- would help fix checking for valid move before moving hero on board (can call validMove()
+    and force player to choose a different option if move is not valid)
+- would also help fix bug where hitting 'i' counts as a separate action

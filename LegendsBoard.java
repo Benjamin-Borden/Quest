@@ -129,7 +129,7 @@ public class LegendsBoard extends Board{
     public void monsterActions(){
         for(int h = boardHeight-1; h> -1;h--) {
             for (int w = boardWidth-1; w > -1; w--) {
-                System.out.println(boardState[h][w].hasMonster()+" H:"+h+" W:"+w);
+                //System.out.println(boardState[h][w].hasMonster()+" H:"+h+" W:"+w);
 
                 if (boardState[h][w].hasMonster()) {
                     Monster m = boardState[h][w].getMonst();
