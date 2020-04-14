@@ -47,7 +47,10 @@ Gameplay:
     - If a hero dies, they respawn on nexus
 
 Concrete TODO:
-- addBoost & removeBoost when player steps on & off tile
-- fighting capabilities when a hero is within range of a monster
-- initiate boardstate such that it randomizes where cave/koulou/bush/plain tiles are generated
-- check for valid move before moving hero on board 
+- check for valid move before moving hero on board (restrict when beside monster)
+- fix when print statements are called 
+    + "__ has died" when the character is not dead
+    + location prints? "false H:3 W:7" for example
+    + label printed hp after an attack
+    + force to choose 3 heroes
+    + print board after choosing heroes
