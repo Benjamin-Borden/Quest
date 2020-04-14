@@ -18,7 +18,7 @@ public class LegendsBoard extends Board{
         HERO_NEXUS_ROW = boardHeight-1;
         game = g;
         generateBoardState();
-        playerLocs = new int[][]{{0*(LANE_WIDTH+1),0},{1*(LANE_WIDTH+1),0},{2*(LANE_WIDTH+1),0}};
+        playerLocs = new int[][]{{0,0*(LANE_WIDTH+1)},{0,1*(LANE_WIDTH+1)},{0,2*(LANE_WIDTH+1)}};
 
     }
     private void generateBoardState(){
