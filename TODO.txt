@@ -1,56 +1,16 @@
-Board:
-    8x8 grid
-    3 lanes -- width of 2 cells separated by "lane" of 
-               one single unpassable lanes
-    Cell types:
-        - "Nexus": cells in first and last row (not including unpassable lanes)
-                   spawn heros and monsters at start of game
-                   when member of enemy team reaches opposite nexus, that team wins
-                   contains market
-                   > works the same as the previous market, can buy/spell
-                     as many items as they want
-        - "Plain": no special attributes
-        - "Bush": *boost dexterity by 10%
-        - "Inaccessible": same as before
-        - "Koulou": *boost strength by 10%
-        - "Cave": *boost agility by 10%
-        * - boost persists every round the hero is in the cell 
-        NOTE: in one cell, there can only be a max of 1 character per type
-                (there can be 0 characters, 1 hero, 1 monster, or 1 hero & 1 monster,
-                 but not 2+ heroes or 2+ monsters)
-
-Gameplay:
-    - team of 3 heroes controlled by player
-    - team of 3+ monsters controlled by computer
-        > 3 new monsters spawn at nexus (one for each lane) every 8 turns
-    - Game ends when either a hero reaches monster nexus or monster reaches 
-        hero nexus
-    - ROUND:
-        > player takes one action per hero
-            + same four "fight" actions as before (attack, spell,
-              change weapon/armor, use potion)
-            + Move (wasd, and also b to go back to nexus)
-            + TELEPORT (new - move to any cell in a DIFFERENT lane,
-                provided it is legal)
-            Note: legal moves are still wasd, only in accessible spaces,
-                  but also now you cannot move past the monster in the
-                  lane you are currently in, and you can go back to the 
-                  nexus at any time
-        > regain 10% hp and 10% mana at the start of every round
-
-    - START OF GAME:
-        > one hero on the nexus of each lane
-        > one monster of appropriate lvl on the opposite nexus
-          of each lane
-        Note: alluded to bonus points for randomizing exactly which
-              tile on the nexus
-    - If a hero dies, they respawn on nexus
-
-Concrete TODO:
+TODO:
 - check for valid move before moving hero on board (restrict when beside monster)
 - fix when print statements are called 
     + "__ has died" when the character is not dead
     + location prints? "false H:3 W:7" for example
     + label printed hp after an attack
-    + force to choose 3 heroes
-    + print board after choosing heroes
+- force to choose 3 heroes
+- print board after choosing heroes
+- add spawn of monsters after 8 turns
+- check if tile is already full before teleporting
+- regain 10% health and mana at the start of each round (turn?)
+- null pointer exception after killing monsters
+- ensure when a hero dies they respawn on nexus
+- monsters don't spawn on their nexus, they spawn on row 1?
+- fix back bug where lanes 2 and 3 don't go where they're supposed to
+- don't let them walk off the edge of the board (esp in lanes 1 and 3)
