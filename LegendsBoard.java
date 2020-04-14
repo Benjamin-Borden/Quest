@@ -70,7 +70,7 @@ public class LegendsBoard extends Board{
             System.out.println("Which row would you like to teleport to? (from 0 to " + (boardHeight-1) + ")");
             row = Input.getInt(0,boardHeight-1);
             if (validTeleport(row, col, heroID)) { accepted=true;}
-            else {System.out.println("Remember, you cannot teleport within your own lane, and you cannot teleport past the last monster in your target lane. Try again.");}
+            else {System.out.println("Remember, you cannot teleport within your own lane, you cannot teleport past the last monster in your target lane, and you cannot move into the same lane as a fellow hero. Try again.");}
         } while (accepted == false);
         return moveTo(row, col, heroID);
     }
@@ -96,7 +96,6 @@ public class LegendsBoard extends Board{
             ret = false;
         }
         // can't teleport into same lane
-
         else if (getLane(position[1])==getLane(col)) {
             ret = false;
         }
@@ -109,6 +108,8 @@ public class LegendsBoard extends Board{
         if (!moveToTile.passable()) {ret = false;}
         // can't go past monster in lane
         else if (row<monsterLoc(getLane(col))) {ret = false;}
+        // can't go in a tile already occupied by a hero
+        else if (moveToTile.hasHero()) {ret = false;}
         return ret;
 
     }

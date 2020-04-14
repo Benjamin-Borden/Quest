@@ -16,7 +16,7 @@ How to Run Program!
 
     in order to compile the files and
 
-    java Main.java
+    java Main
 
     in order to run the program. The prompts will guide you from there.
 
