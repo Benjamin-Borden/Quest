@@ -43,7 +43,7 @@ public class LegendsGame extends Game<LegendsBoard> {
                 // don't consume an action when player asks for input
                 while(Character.toUpperCase(input)=='I'){
                     players[0].displayParty();
-                    input = getHeroAction();
+                    input = getHeroAction(i);
                 }
                 if(Character.toUpperCase(input)=='Q'){
                     continuePlaying = false;
