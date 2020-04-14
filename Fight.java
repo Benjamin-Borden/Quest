@@ -4,7 +4,7 @@ public class Fight {
     private Player player;
     private Hero[] heros;
     private Monster[] monsters;
-    private final float PERCENT_REGEN = .1; // percent health/mana heroes regenerate after fighting
+    public static final double PERCENT_REGEN = .1; // percent health/mana heroes regenerate after fighting
 
     //exp and gold bonus from combat
     public static final int GOLD_BONUS = 150;
