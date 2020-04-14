@@ -70,7 +70,7 @@ public class Game<T extends Board> {
             }
 
             System.out.println("What hero do you want? You must choose a total of 3.");
-            int inp = Input.getInt(0,heroes.length);
+            int inp = Input.getInt(1,heroes.length);
             // if(inp==0){
             //     if(temp.size()==0){
             //         System.out.println("You must have at least one hero!");
