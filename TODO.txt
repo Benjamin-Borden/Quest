@@ -1,7 +1,0 @@
-TODO:
-- done!
-
-Optional/stylistic fixes:
-- fix inital print board so it shows monsters spawning on nexus
-- wait() between printed lines/board prints (wherever it looks good)
-- add introduction

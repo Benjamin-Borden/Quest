@@ -32,6 +32,7 @@ public class LegendsGame extends Game<LegendsBoard> {
         System.out.println("| o __   | o __   | o __ ");
 		System.out.println("+/|-)_)  +/|-)_)  +/|-)_)");
 		System.out.println(" / \\      / \\      / \\   ");
+        System.out.println();
 
         int roundCounter = ROUNDS_BETWEEN_MONSTER_SPAWNS;
         boolean continuePlaying = true;
