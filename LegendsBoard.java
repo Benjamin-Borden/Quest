@@ -83,7 +83,7 @@ public class LegendsBoard extends Board{
         int randomCell = random.nextInt(LANE_WIDTH);
         int[] position = playerLocs[heroID];
 
-        int nexusCell = ((getLane(position[1])-1)*(LANE_WIDTH+1)) + randomCell;
+        int nexusCell = ((getLane(position[0])-1)*(LANE_WIDTH+1)) + randomCell;
         moveTo(HERO_NEXUS_ROW, nexusCell, heroID);
     }
 
@@ -96,7 +96,6 @@ public class LegendsBoard extends Board{
             ret = false;
         }
         // can't teleport into same lane
-
         else if (getLane(position[1])==getLane(col)) {
             ret = false;
         }
