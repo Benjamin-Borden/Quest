@@ -25,6 +25,7 @@ public class LegendsGame extends Game<LegendsBoard> {
 
         System.out.println("Welcome to Quest of Legends! In Quest of Legends you are trying to prevent the enemy monsters from reach your nexus!");
         System.out.println("You win by reaching the opposing nexus! You may fight the monster, drink potions, equip armor, or buy things from the nexus.");
+        System.out.println();
         System.out.println("Use wasd to move around! the i key will open your inventory and e will let you drink a potion or equip a weapon or armor!");
         System.out.println("Red I's are unpassable, white P's are plain tiles, purple C's are caves which boost your agility, green B's are bushes which boost\nyour dexterity, and turquoise K's are koulous which boost your strength!");
         System.out.println("Your heroes are the gold H!");
@@ -40,6 +41,7 @@ public class LegendsGame extends Game<LegendsBoard> {
             if(roundCounter++%ROUNDS_BETWEEN_MONSTER_SPAWNS==0) {
                 board.spawnMonsters();
                 System.out.println(board);
+                System.out.println();
             }
             board.monsterActions();
             boolean monstWin = board.checkWinFor("monster");
@@ -91,6 +93,8 @@ public class LegendsGame extends Game<LegendsBoard> {
                 if(players[0].isWinner()){
                     System.out.println(board);
                     System.out.println("CONGRATULATIONS! YOU HAVE WON QUEST OF LEGENDS");
+                    System.out.println();
+                    printEnd("win");
                     continuePlaying= false;
                     break;
                 }else{
@@ -101,6 +105,8 @@ public class LegendsGame extends Game<LegendsBoard> {
             }
             if(monstWin){
                 System.out.println("THE MONSTERS HAVE WON, GAME OVER.");
+                System.out.println();
+                printEnd("loss");
                 continuePlaying = false;
             }else{
                 Fight.regenerateHeroes(players[0].getParty());
@@ -120,5 +126,23 @@ public class LegendsGame extends Game<LegendsBoard> {
         }else{
             return equipWeaponOrArmor((players[0].getParty()[hero]));
         }
+    }
+
+
+    public static void printEnd(String winOrLoss) {
+        System.out.println("        ,     \    /      ,        ");
+        System.out.println("       / \    )\__/(     / \       ");
+        System.out.println("      /   \  (_\  /_)   /   \      ");
+        System.out.println(" ____/_____\__\@  @/___/_____\____ ");
+        System.out.println("|             |\../|              |");
+        System.out.println("|              \VV/               |");
+        if (winOrLoss.equals("win")) { System.out.println("|          Y O U  W O N !         |");}
+        else {System.out.println("|          Y O U  L O S T         |");}
+        System.out.println("");
+        System.out.println("|_________________________________|");
+        System.out.println(" |    /\ /      \\       \ /\    | ");
+        System.out.println(" |  /   V        ))       V   \  | ");
+        System.out.println("|/     `       //        '     \| ");
+        System.out.println("`              V                '");
     }
 }
