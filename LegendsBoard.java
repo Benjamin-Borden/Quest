@@ -158,7 +158,7 @@ public class LegendsBoard extends Board{
                         boardState[h + 1][w].setMonst(boardState[h][w].getMonst());
                         boardState[h][w].setMonst(null);
                         if (boardState[h][w] instanceof Nexus && ((Nexus)boardState[h][w]).getTeam().equals("hero")) {
-                            System.out.println("THE MONSTERS HAVE WON, GAME OVER.");
+                            //System.out.println("THE MONSTERS HAVE WON, GAME OVER.");
                         }
                     }
                 }
@@ -225,8 +225,8 @@ public class LegendsBoard extends Board{
         return checkWinFor("hero");
     }
 
-    private boolean checkWinFor(String team) {
-        if (!team.equals("hero") || !team.equals("monster")) {
+    public boolean checkWinFor(String team) {
+        if (!team.equals("hero") && !team.equals("monster")) {
             throw new IllegalArgumentException("Team must be either hero or monster.");
         }
         boolean ret = false;

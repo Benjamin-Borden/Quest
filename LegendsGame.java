@@ -34,6 +34,7 @@ public class LegendsGame extends Game<LegendsBoard> {
             if(roundCounter++%ROUNDS_BETWEEN_MONSTER_SPAWNS==0)
                 board.spawnMonsters();
             board.monsterActions();
+            boolean monstWin = board.checkWinFor("monster");
 
             // iterate through each hero in party for actions
             for(int i=0; i<players[0].getParty().length; i++) {
@@ -90,7 +91,13 @@ public class LegendsGame extends Game<LegendsBoard> {
                     }
                 }
             }
-            Fight.regenerateHeroes(players[0].getParty());
+            if(monstWin){
+                System.out.println("THE MONSTERS HAVE WON, GAME OVER.");
+                continuePlaying = false;
+            }else{
+                Fight.regenerateHeroes(players[0].getParty());
+            }
+
 
         }while(continuePlaying);
     }
