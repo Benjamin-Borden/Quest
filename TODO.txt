@@ -1,7 +1,6 @@
 TODO:
 - check for valid move before moving hero on board (restrict when beside monster)
 - fix when print statements are called 
-    + location prints? "false H:3 W:7" for example
     + label printed hp after an attack
 - end game when monsters reach hero nexus
 - regain 10% health and mana at the start of each round (turn?)
