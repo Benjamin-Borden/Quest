@@ -1,14 +1,13 @@
 TODO:
-- check for valid move before moving hero on board (restrict when beside monster)
-- fix when print statements are called 
-    + label printed hp after an attack
+- *check for valid move before moving hero on board (restrict when beside monster &
+    don't let the heroes walk off the board)
+- printed hp after an attack -> add label for hero and monster to clarify who's hp is whose
 - end game when monsters reach hero nexus
 - regain 10% health and mana at the start of each round (turn?)
 - null pointer exception after killing monsters
-- monsters don't spawn on their nexus, they spawn on row 1?
-- fix back bug where lanes 2 and 3 don't go where they're supposed to
-- don't let them walk off the edge of the board (esp in lanes 1 and 3)
-- Info counts as action bug
+- monsters don't spawn on their nexus, they spawn on row 1
+- fix back bug (see below)
+- *Info counts as action bug
 
 POTENTIAL FIX:
 - move choosing the hero action to a separate method
@@ -16,3 +15,6 @@ POTENTIAL FIX:
 - would help fix checking for valid move before moving hero on board (can call validMove()
     and force player to choose a different option if move is not valid)
 - would also help fix bug where hitting 'i' counts as a separate action
+
+BACK BUG:
+- the position index is incorrect, but when fixed, the initial spawn doesn't work correctly
