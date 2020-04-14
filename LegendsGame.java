@@ -38,12 +38,6 @@ public class LegendsGame extends Game<LegendsBoard> {
             // iterate through each hero in party for actions
             for(int i=0; i<players[0].getParty().length; i++) {
                 players[0].setHeroTurn(i);
-                try {
-                    Thread.sleep(1000);
-                }
-                catch(InterruptedException ex) {
-                        Thread.currentThread().interrupt();
-                }
                 System.out.println(board);
                 boolean validAction = false;
                 System.out.println("What would " + players[0].getParty()[i].getName() + " like to do?");
