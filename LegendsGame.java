@@ -89,7 +89,7 @@ public class LegendsGame extends Game<LegendsBoard> {
                     }
                 }
             }
-            Fight.regenerateHealth(players[0].getParty());
+            Fight.regenerateHeroes(players[0].getParty());
 
         }while(continuePlaying);
     }

@@ -2,8 +2,8 @@ TODO:
 - end game when monsters reach hero nexus
 - regain 10% health and mana at the start of each round (turn?) 
 - null pointer exception after killing monsters 
-- monsters don't spawn on their nexus, they spawn on row 1
-
+- fix inital print board so it shows monsters spawning on nexus
+// elyse notes
 print between spawn monsters and monster actions
 2 - monsters receive dmg
 i display monster Info
