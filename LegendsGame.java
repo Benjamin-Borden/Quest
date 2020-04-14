@@ -39,7 +39,7 @@ public class LegendsGame extends Game<LegendsBoard> {
                 players[0].setHeroTurn(i);
                 System.out.println(board);
 
-                char input = getHeroAction();
+                char input = getHeroAction(i);
                 // don't consume an action when player asks for input
                 while(Character.toUpperCase(input)=='I'){
                     players[0].displayParty();
@@ -78,7 +78,7 @@ public class LegendsGame extends Game<LegendsBoard> {
         }while(continuePlaying);
     }
 
-    private char getHeroAction() {
+    private char getHeroAction(int i) {
         System.out.println("What would " + players[0].getParty()[i].getName() + " like to do?");
         System.out.println("(WASD for movement, E for interacting with inventory, I for hero information, T to teleport to a different lane, or B to return back to the nexus.)");
         boolean monsterCloseBy = board.monsterCloseBy(i);
