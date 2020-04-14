@@ -4,6 +4,7 @@ public class Fight {
     private Player player;
     private Hero[] heros;
     private Monster[] monsters;
+    private final float PERCENT_REGEN = .1; // percent health/mana heroes regenerate after fighting
 
     //exp and gold bonus from combat
     public static final int GOLD_BONUS = 150;
@@ -314,5 +315,13 @@ public class Fight {
         int ind = Input.getInt(1,e.length);
         System.out.println(e[ind-1]);
         return false;
+    }
+
+    public static void regenerateHeroes(Hero[] heroes) {
+        System.out.println("All heroes regenerated " + (100*PERCENT_REGEN) + " of their health and mana!");
+        for(Hero h: heroes){
+            h.setCurrentHealth((int) (h.getCurrentHealth()*(1+PERCENT_REGEN)));
+            h.setCurrentMana((int) (h.getCurrentMana()*(1+PERCENT_REGEN)));
+        }
     }
 }
