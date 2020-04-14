@@ -1,9 +1,7 @@
 TODO:
 - end game when monsters reach hero nexus
+
+Optional/stylistic fixes:
 - fix inital print board so it shows monsters spawning on nexus
-// elyse notes
-print between spawn monsters and monster actions
-i display monster Info
-overworldfight.displayInfo()
-put -hp feature in readme
-put all heroes recieve gold and exp after fight in readme because it was ambiguous
+- display monster info 
+- wait() between printed lines/board prints (wherever it looks good)

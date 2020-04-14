@@ -66,7 +66,7 @@ Potions.txt: holds data for types of potions available in-game
 Weaponry.txt: holds data for types of weapons available in-game
 FireSpells.txt: holds data for types of fire spells available in-game
 IceSpells.txt: holds data for types of ice spells available in-game
-LightningSpells.txt: holds data for types of lightning spells avaiable in-game
+LightningSpells.txt: holds data for types of lightning spells available in-game
 Paladins.txt: holds data for types of paladin heroes available in-game
 Sorcerers.txt: holds data for types of sorcerer heroes available in-game
 Warriors.txt: holds data for types of warrior heroes available in-game
@@ -74,7 +74,15 @@ Dragons.txt: holds data for types of dragon monsters available in-game
 Exoskeletons.txt: holds data for types of exoskeleton monsters available in-game
 Spirits.txt: holds data for types of spirit monsters available in-game
 
-
+5. Notes about implementation
+We chose to show the HP for monsters to be negative after the hero deals
+the mortal blow, since we believed it would be useful for players to be able 
+to see how much damage they did to the monster. 
+We also decided to allow all heroes to recieve HP and experience after a 
+monster has been defeated since it would increase the player enjoyability and
+makes the game more fast-paced, since it will allow heroes to level up sooner.
+In addition, we thought it was feasible in our world that all the heroes share
+the "loot" gained from defeating any particular monster.
 
 
 
