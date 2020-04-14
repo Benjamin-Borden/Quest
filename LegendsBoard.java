@@ -70,7 +70,7 @@ public class LegendsBoard extends Board{
             System.out.println("Which row would you like to teleport to? (from 0 to " + (boardHeight-1) + ")");
             row = Input.getInt(0,boardHeight-1);
             if (validTeleport(row, col, heroID)) { accepted=true;}
-            else {System.out.println("Remember, you cannot teleport within your own lane, and you cannot teleport past the last monster in your target lane. Try again.");}
+            else {System.out.println("Remember, you cannot teleport within your own lane, you cannot teleport past the last monster in your target lane, and you cannot move into the same lane as a fellow hero. Try again.");}
         } while (accepted == false);
         moveTo(row, col, heroID);
     }
