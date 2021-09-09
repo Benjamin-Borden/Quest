@@ -1,7 +1,4 @@
-Group Member 1: Benjamin Borden - U53067162
-Group Member 2: Elyse Kaczmarek - U65134290
 
-Group Number: 6
 
 How to Run Program!
 1.  Verify that you have an up to date JDK installed, if not installed, go to
